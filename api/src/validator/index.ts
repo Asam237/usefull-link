@@ -41,6 +41,9 @@ class Validator implements IValidator {
     user: {
       createUser: "createUser",
     },
+    link: {
+      createLink: "createLink",
+    },
   };
 }
 
