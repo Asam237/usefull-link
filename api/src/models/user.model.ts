@@ -18,10 +18,10 @@ const userSchema: mongoose.Schema = new mongoose.Schema({
     type: String,
     enum: ["NORMAL", "ADMIN"],
     default: "NORMAL",
+    required: true,
   },
   avatar: {
     type: String,
-    required: true,
   },
 });
 
