@@ -44,7 +44,7 @@ class AuthController {
       const token: string = jwt.sign(tokenInfo, JWT_SECRET!!, {
         expiresIn: EXPIRES,
       });
-      return res.status(200).json({ ...user, token: token });
+      return res.status(200).json({ token });
     } catch (error) {
       console.log(error);
     }
