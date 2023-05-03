@@ -33,7 +33,7 @@ class AuthController {
       if (!user) {
         return res.status(403).json({ message: "login failed !" });
       }
-      const isMatch: boolean = bcrypt.compareSync(user.password, password);
+      const isMatch: boolean = bcrypt.compareSync(password, user.password);
       if (!isMatch) {
         return res.status(403).json({ message: "login failed !" });
       }
