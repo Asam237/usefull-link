@@ -23,6 +23,12 @@ const userSchema: mongoose.Schema = new mongoose.Schema({
   avatar: {
     type: String,
   },
+  links: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Link",
+    },
+  ],
 });
 
 const UserModel: any = mongoose.model("User", userSchema);

@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { LinkModel } from "../models/link.model";
+import { UserModel } from "../models/user.model";
 
 class LinkController {
   public static async create(
@@ -8,11 +9,13 @@ class LinkController {
     next: NextFunction
   ): Promise<any> {
     try {
-      const { name, description, url, report, status, user }: any = req.body;
+      const { name, description, url, report, status }: any = req.body;
+      const user = await UserModel.findById({ _id: req.body.user });
       const linkParams: any = { name, description, url, report, status, user };
       const link: any = new LinkModel(linkParams);
+      user.links.push(link._id);
       await link.save();
-      return res.status(200).json({ link });
+      return res.status(200).json({ user });
     } catch (error) {
       console.log(error);
     }

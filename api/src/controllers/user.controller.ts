@@ -8,9 +8,8 @@ class UserController {
     next: NextFunction
   ): Promise<any> {
     try {
-      const users: any = await UserModel.find({
-        user: req.params.user,
-      }).populate("link");
+      const users: any = await UserModel.find({});
+      console.log(users);
       return res.status(200).json({ users });
     } catch (error) {
       console.log(error);
