@@ -41,7 +41,7 @@ class AuthController {
       const tokenInfo: TokenInfo = {
         id: _id,
       };
-      const token: string = jwt.sign(tokenInfo, JWT_SECRET, {
+      const token: string = jwt.sign(tokenInfo, JWT_SECRET!!, {
         expiresIn: EXPIRES,
       });
       return res.status(200).json({ ...user, token: token });
