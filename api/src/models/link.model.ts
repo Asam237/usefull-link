@@ -15,6 +15,7 @@ const linkSchema: mongoose.Schema = new mongoose.Schema({
   },
   report: {
     type: Boolean,
+    default: false,
     required: true,
   },
   status: {
