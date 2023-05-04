@@ -14,6 +14,13 @@ export type FeatureItemType = {
     content: string
 }
 
+export type TeamItemType = {
+    pic: any
+    name: string
+    role: string
+    description: string
+}
+
 export type FaqItemType = {
     title: string
     content: string

@@ -4,6 +4,7 @@ import { Header } from '../components/commons/header.common'
 import { FAQ } from '../components/sections/faq.section'
 import { Feature } from '../components/sections/feature.section'
 import { Intro } from '../components/sections/intro.section'
+import { Teams } from '../components/sections/teams.section'
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
           <div className="container mx-auto">
             <Intro />
             <Feature />
+            <Teams />
             <FAQ />
           </div>
         </main>
