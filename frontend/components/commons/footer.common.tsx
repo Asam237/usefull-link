@@ -11,12 +11,12 @@ export const Footer = () => {
         <footer className={`${ubuntu.className} text-sm`}>
             <div className="container mx-auto">
                 <div>
-                    <div className="flex flex-col lg:flex-row lg:justify-between items-center py-4">
+                    <div className="flex flex-col lg:flex-row lg:justify-between items-center py-4 lg:py-6">
                         <div className="flex justify-center items-center">
                             <AiOutlineGlobal size={25} className="mr-1" />
                             <p>Built by<Link href={'https://github.com/Asam237'} className="ml-1 underline underline-offset-4">Asam</Link></p>
                         </div>
-                        <div className="flex justify-center items-center">
+                        <div className="flex justify-center items-center pt-4 lg:pt-0">
                             {
                                 footerlink.map((item, index) => {
                                     return (
@@ -28,11 +28,11 @@ export const Footer = () => {
                     </div>
                 </div>
                 <div className="border-t">
-                    <div className="flex flex-col lg:flex-row lg:justify-between items-center py-4">
+                    <div className="flex flex-col lg:flex-row lg:justify-between items-center py-4 lg:py-6">
                         <div className="flex justify-center items-center">
                             <p>© Copyright {new Date().getFullYear()}, All Rights Reserved</p>
                         </div>
-                        <div className="flex justify-center items-center">
+                        <div className="flex justify-center items-center pt-4 lg:pt-0">
                             {
                                 footerlinkCondition.map((item, index) => {
                                     return (
