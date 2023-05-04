@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { Footer } from '../components/commons/footer.common'
 import { Header } from '../components/commons/header.common'
 
 export default function Home() {
@@ -12,7 +13,12 @@ export default function Home() {
       </Head>
       <div>
         <Header />
-        hello world
+        <main className='py-16'>
+          <div className="container mx-auto">
+            hello world
+          </div>
+        </main>
+        <Footer />
       </div>
     </>
   )

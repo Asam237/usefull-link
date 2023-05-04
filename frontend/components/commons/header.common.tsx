@@ -1,6 +1,6 @@
 import { Ubuntu } from "@next/font/google"
 import Link from "next/link"
-import { AiOutlineLink, AiFillGithub, AiOutlineGlobal } from "react-icons/ai"
+import { AiFillGithub, AiOutlineGlobal } from "react-icons/ai"
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export const Header = () => {
