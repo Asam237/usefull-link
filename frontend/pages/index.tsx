@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { Header } from '../components/commons/header.common'
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
+        <Header />
         hello world
       </div>
     </>
