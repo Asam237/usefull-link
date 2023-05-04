@@ -1,11 +1,11 @@
-import { Ubuntu } from "@next/font/google"
+import { Inter } from "@next/font/google"
 import Link from "next/link"
 import { AiFillGithub, AiOutlineGlobal } from "react-icons/ai"
 
-const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
+const inter = Inter({ weight: "400", subsets: ['latin'] })
 export const Header = () => {
     return (
-        <header className={`${ubuntu.className} py-4 border-b`}>
+        <header className={`${inter.className} py-4 border-b`}>
             <div className="container mx-auto">
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                     <div>
