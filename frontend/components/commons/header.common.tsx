@@ -5,7 +5,7 @@ import { AiFillGithub, AiOutlineGlobal } from "react-icons/ai"
 const inter = Inter({ weight: "400", subsets: ['latin'] })
 export const Header = () => {
     return (
-        <header className={`${inter.className} py-4 border-b`}>
+        <header className={`${inter.className} py-4 border-b z-50 sticky top-0 left-0 bg-white`}>
             <div className="container mx-auto">
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                     <div>

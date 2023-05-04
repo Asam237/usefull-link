@@ -7,3 +7,9 @@ export type FooterLinkConditionType = {
     name: string
     path: string
 }
+
+export type FeatureItemType = {
+    icon: any
+    title: string
+    content: string
+}
