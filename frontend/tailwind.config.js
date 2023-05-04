@@ -25,7 +25,7 @@ module.exports = {
             maxWidth: "75vw",
           },
           "@screen xl": {
-            maxWidth: "1080px",
+            maxWidth: "1180px",
           },
         },
         ".container-other": {
