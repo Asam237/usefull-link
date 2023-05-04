@@ -14,8 +14,8 @@ export const footerlink: FooterLinkType[] = [
 
 export const footerlinkCondition: FooterLinkConditionType[] = [
     {
-        name: "Privacy Police",
-        path: "/"
+        name: "FAQ",
+        path: "#faq"
     },
     {
         name: "Terms & Conditions",

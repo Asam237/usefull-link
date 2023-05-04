@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Footer } from '../components/commons/footer.common'
 import { Header } from '../components/commons/header.common'
+import { FAQ } from '../components/sections/faq.section'
 import { Feature } from '../components/sections/feature.section'
 import { Intro } from '../components/sections/intro.section'
 
@@ -19,6 +20,7 @@ export default function Home() {
           <div className="container mx-auto">
             <Intro />
             <Feature />
+            <FAQ />
           </div>
         </main>
         <Footer />

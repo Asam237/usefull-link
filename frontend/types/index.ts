@@ -13,3 +13,9 @@ export type FeatureItemType = {
     title: string
     content: string
 }
+
+export type FaqItemType = {
+    title: string
+    content: string
+    lists?: string[]
+}
