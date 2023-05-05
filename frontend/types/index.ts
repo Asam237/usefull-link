@@ -31,3 +31,15 @@ export type HeaderItemType = {
     name: string
     path: string
 }
+
+export type AuthLoginType = {
+    email: string
+    password: string
+}
+
+export type AuthCreateType = {
+    fullname: string
+    email: string
+    password: string
+    userType: string
+}
