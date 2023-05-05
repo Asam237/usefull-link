@@ -26,7 +26,6 @@ export default function Login() {
         return new AuthService().login({ email, password }).then((res: any) => {
             setLoading(false)
             if (res.status === 200) {
-                console.log("Data ----", res.data.fullname)
                 setUserToken(res.data.token)
                 setFullname(res.data.fullname)
                 router.push("/")
