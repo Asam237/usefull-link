@@ -14,11 +14,15 @@ export const footerlink: FooterLinkType[] = [
 
 export const footerlinkCondition: FooterLinkConditionType[] = [
     {
-        name: "FAQ",
-        path: "#faq"
+        name: "Features",
+        path: "#features"
     },
     {
-        name: "Terms & Conditions",
-        path: "/"
+        name: "Teams",
+        path: "#teams"
+    },
+    {
+        name: "FAQs",
+        path: "#faq"
     },
 ]

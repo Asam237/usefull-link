@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { AiOutlineGlobal } from "react-icons/ai"
+import { AiOutlineCodepen } from "react-icons/ai"
 import { Inter } from "@next/font/google"
 import { footerlink, footerlinkCondition } from "../../data/footer"
 import Image from "next/image"
@@ -12,7 +12,7 @@ export const Footer = () => {
                 <div>
                     <div className="flex flex-col lg:flex-row lg:justify-between items-center py-4 lg:py-6">
                         <div className="flex justify-center items-center">
-                            <AiOutlineGlobal size={18} className="mr-1 text-gray-600" />
+                            <AiOutlineCodepen size={25} className="mr-1 text-gray-600" />
                             <p className="leading-loose text-gray-600">Built by<Link target={"_blank"} href={'https://github.com/Asam237'} className="mx-1 underline underline-offset-4 text-black font-semibold">Asam</Link>🇨🇲</p>
                         </div>
                         <div className="flex justify-center items-center pt-4 lg:pt-0">

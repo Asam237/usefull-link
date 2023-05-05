@@ -1,24 +1,37 @@
 import { Inter } from "@next/font/google"
 import Link from "next/link"
-import { AiFillGithub, AiOutlineGlobal } from "react-icons/ai"
+import { AiOutlineCodepen } from "react-icons/ai"
+import { headers } from "../../data/header"
 
 const inter = Inter({ weight: "400", subsets: ['latin'] })
 export const Header = () => {
     return (
-        <header className={`${inter.className} py-4 border-b z-50 sticky top-0 left-0 bg-white`}>
+        <header className={`${inter.className} py-4 shadow-md border-b z-50 sticky top-0 left-0 bg-white`}>
             <div className="container mx-auto">
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
-                    <div>
-                        <div className="flex justify-center items-center">
-                            <AiOutlineGlobal size={25} />
-                            <h1 className="text-xl font-bold ml-2">Savelink</h1>
-                        </div>
+                    <div className="flex lg:flex-row items-center">
+                        <AiOutlineCodepen size={40} />
+                        <ul className="ml-4">
+                            {
+                                headers.map((item, index) => {
+                                    return (
+                                        <Link className="my-2 text-sm mx-2 font-medium hover:underline hover:underline-offset-4 hover:font-semibold" href={item.path} key={index}>{item.name}</Link>
+                                    )
+                                })
+                            }
+                        </ul>
                     </div>
-                    <div className="flex justify-center items-center border px-8 py-2 rounded-md border-black mt-4 lg:mt-0 hover:bg-black hover:text-white">
-                        <AiFillGithub size={25} />
-                        <Link href={'https://github.com/Asam237/usefull-link'} className="font-semibold text-sm ml-4">
-                            Star on Github
-                        </Link>
+                    <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 mt-4 lg:mt-0">
+                        <div className="flex justify-center items-center">
+                            <Link href={'#signin'} className="font-semibold text-sm hover:underline hover:underline-offset-4">
+                                Sign in
+                            </Link>
+                        </div>
+                        <div className="flex justify-center items-center border px-4 py-2 rounded-md border-black hover:bg-black hover:text-white">
+                            <Link href={'signup'} className="font-semibold text-sm">
+                                Sign up
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

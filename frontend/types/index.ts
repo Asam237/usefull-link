@@ -26,3 +26,8 @@ export type FaqItemType = {
     content: string
     lists?: string[]
 }
+
+export type HeaderItemType = {
+    name: string
+    path: string
+}
