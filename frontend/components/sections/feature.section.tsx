@@ -1,11 +1,9 @@
-import { Inter } from "@next/font/google"
 import { features } from "../../data/features"
 import { FeatureItem } from "./featureItem.section"
 
-const inter = Inter({ weight: "400", subsets: ['latin'] })
 export const Feature = () => {
     return (
-        <section id="features" className={`${inter.className} text-md px-4 pt-32 lg:pt-52 lg:max-w-7xl`}>
+        <section id="features" className={`text-md px-4 pt-32 lg:pt-52 lg:max-w-7xl`}>
             <div className="flex justify-center items-center flex-col text-center">
                 <h1 className="text-2xl lg:text-6xl text-gray-900 font-bold leading-tight">
                     What features to expect

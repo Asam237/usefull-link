@@ -1,12 +1,10 @@
-import { Inter } from "@next/font/google"
 import Link from "next/link"
 import { AiOutlineCodepen } from "react-icons/ai"
 import { headers } from "../../data/header"
 
-const inter = Inter({ weight: "400", subsets: ['latin'] })
 export const Header = () => {
     return (
-        <header className={`${inter.className} py-4 shadow-md border-b z-50 sticky top-0 left-0 bg-white`}>
+        <header className={`py-4 shadow-md border-b z-50 sticky top-0 left-0 bg-white`}>
             <div className="container mx-auto">
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                     <div className="flex lg:flex-row items-center">
@@ -28,7 +26,7 @@ export const Header = () => {
                             </Link>
                         </div>
                         <div className="flex justify-center items-center border px-4 py-2 rounded-md border-black hover:bg-black hover:text-white">
-                            <Link href={'signup'} className="font-semibold text-sm">
+                            <Link href={'/create'} className="font-semibold text-sm">
                                 Sign up
                             </Link>
                         </div>

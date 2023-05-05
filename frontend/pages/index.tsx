@@ -5,7 +5,9 @@ import { FAQ } from '../components/sections/faq.section'
 import { Feature } from '../components/sections/feature.section'
 import { Intro } from '../components/sections/intro.section'
 import { Teams } from '../components/sections/teams.section'
+import { Ubuntu } from "@next/font/google"
 
+const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Home() {
   return (
     <>
@@ -15,7 +17,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
+      <div className={`${ubuntu.className}`}>
         <Header />
         <main className='py-16 lg:py-40'>
           <div className="container mx-auto">

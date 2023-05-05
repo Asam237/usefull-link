@@ -1,11 +1,9 @@
-import { Inter } from "@next/font/google"
 import Link from "next/link"
 import { AiOutlineLink, AiOutlineUser } from "react-icons/ai"
 
-const inter = Inter({ weight: "400", subsets: ['latin'] })
 export const Intro = () => {
     return (
-        <section className={`${inter.className} text-md`}>
+        <section className={`text-md`}>
             <div className="flex justify-center items-center flex-col text-center">
                 <h1 className="text-2xl lg:text-6xl text-gray-900 font-bold leading-tight">
                     Save all the important links<br /> you have visited
