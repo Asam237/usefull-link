@@ -23,7 +23,7 @@ export const Header = () => {
                     </div>
                     <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 mt-4 lg:mt-0">
                         <div className="flex justify-center items-center">
-                            <Link href={'#signin'} className="font-semibold text-sm hover:underline hover:underline-offset-4">
+                            <Link href={'/login'} className="font-semibold text-sm hover:underline hover:underline-offset-4">
                                 Sign in
                             </Link>
                         </div>
