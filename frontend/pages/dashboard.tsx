@@ -4,6 +4,8 @@ import { Header } from "../components/commons/header.common";
 import { Footer } from "../components/commons/footer.common";
 import Link from "next/link";
 import { AiOutlinePlus } from "react-icons/ai";
+import { Items } from "../components/commons/items.commont";
+import { items } from "../data/items";
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Dashboard() {
@@ -29,7 +31,16 @@ export default function Dashboard() {
                             </Link>
                         </div>
                     </div>
-                    <hr className="my-10"/>
+                    <hr className="my-10" />
+                    <div className="grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+                        {
+                            items.map((item, index) => {
+                                return (
+                                    <Items key={index} description={item.description} name={item.name} path={item.path} url={item.url} />
+                                )
+                            })
+                        }
+                    </div>
                 </main>
                 <Footer />
             </div>

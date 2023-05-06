@@ -13,6 +13,7 @@ module.exports = {
     extend: {},
   },
   plugins: [
+    require("@tailwindcss/line-clamp"),
     function ({ addComponents }) {
       // Create our own container component
       // and ask tailwind to take it into account.

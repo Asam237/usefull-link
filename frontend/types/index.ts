@@ -43,3 +43,10 @@ export type AuthCreateType = {
     password: string
     userType: string
 }
+
+export type ItemType = {
+    name: String
+    description: String
+    url: String
+    path: String
+}
