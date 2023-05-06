@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import { AiOutlineCodepen } from "react-icons/ai"
-import { Inter } from "@next/font/google"
+import { Ubuntu } from "@next/font/google"
 import Link from 'next/link'
 import { Footer } from '../components/commons/footer.common'
 
-const inter = Inter({ weight: "400", subsets: ['latin'] })
+const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 
 export default function Create() {
     return (
@@ -16,7 +16,7 @@ export default function Create() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div>
-                <main className={`py-16 ${inter.className}`}>
+                <main className={`py-16 ${ubuntu.className}`}>
                     <div className="container mx-auto">
                         <div className='flex flex-col justify-center items-center'>
                             <AiOutlineCodepen size={60} />

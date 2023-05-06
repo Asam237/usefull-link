@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { Footer } from '../components/commons/footer.common'
 import { AiOutlineCodepen } from "react-icons/ai"
-import { Inter } from "@next/font/google"
+import { Ubuntu } from "@next/font/google"
 import Link from 'next/link'
 import { useState } from 'react'
 import { AuthService } from '../services/auth.service'
@@ -9,7 +9,7 @@ import { useRouter } from "next/router"
 import { useRecoilState } from "recoil"
 import { authState, fullnameState } from '../atoms/auth'
 
-const inter = Inter({ weight: "400", subsets: ['latin'] })
+const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 
 export default function Login() {
 
@@ -47,7 +47,7 @@ export default function Login() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div>
-                <main className={`py-16 ${inter.className}`}>
+                <main className={`py-16 ${ubuntu.className}`}>
                     <div className="container mx-auto">
                         <div className='flex flex-col justify-center items-center'>
                             <AiOutlineCodepen size={60} />
