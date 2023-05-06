@@ -7,8 +7,8 @@ export const Items = ({ name, description, url, path }: ItemType) => {
         <div className="px-4 py-2 border rounded-md shadow-lg hover:shadow-2xl">
             <h4 className="text-xl">{name}</h4>
             <p className="text-sm py-4 leading-loose line-clamp-4">{description}</p>
-            <p className="leading-loose line-clamp-1">
-                <Link target={"_blank"} className="text-clip max-w-xs text-blue-600 font-semibold underline truncate underline-offset-4 text-sm hover:text-blue-800" href={""}>{url}</Link>
+            <p className="leading-loose truncate">
+                <Link target={"_blank"} className="text-clip text-sm text-blue-600 font-semibold underline truncate underline-offset-4 hover:text-blue-800" href={""}>{url}</Link>
             </p>
             <hr className="my-3" />
             <div className="flex justify-between items-center">

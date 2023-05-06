@@ -6,9 +6,16 @@ import Link from "next/link";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Items } from "../components/commons/items.commont";
 import { items } from "../data/items";
+import { useState } from "react";
+import { Modal } from "../components/commons/modal.common";
+import Placeholder from "react-select/dist/declarations/src/components/Placeholder";
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Dashboard() {
+    const [addLinkModal, setAddLinkModal] = useState(false)
+    const handleAddLink = () => {
+        setAddLinkModal(true)
+    }
     return (
         <>
             <Head>
@@ -26,9 +33,9 @@ export default function Dashboard() {
                         </h1>
                         <p className="leading-7 max-w-xl mx-auto text-gray-600 mt-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, dolores! Modi culpa nisi cum corrupti.</p>
                         <div className="mt-10 flex">
-                            <Link href={""} className="bg-black h-12 w-64 lg:w-52 rounded-lg text-white flex justify-center items-center hover:text-gray-900 hover:bg-white hover:border hover:border-black">
-                                <AiOutlinePlus size={20} className="mr-2" />  Add new code
-                            </Link>
+                            <button onClick={handleAddLink} className="bg-black h-12 w-64 lg:w-52 rounded-lg text-white flex justify-center items-center hover:text-gray-900 hover:bg-white hover:border hover:border-black">
+                                <AiOutlinePlus size={20} className="mr-2" />  Add new link
+                            </button>
                         </div>
                     </div>
                     <hr className="my-10" />
@@ -44,6 +51,37 @@ export default function Dashboard() {
                 </main>
                 <Footer />
             </div>
+            {
+                addLinkModal && (
+                    <Modal
+                        onClose={() => setAddLinkModal(false)}
+                        title="New link"
+                    >
+                        <div>
+                            <p className='text-sm py-1'>Title</p>
+                            <input type="text" className='px-6 rounded-md py-1 bg-white border w-full' />
+                        </div>
+                        <div>
+                            <p className='text-sm py-1 mt-4'>Link</p>
+                            <input type="text" className='px-6 rounded-md py-1 bg-white border w-full' />
+                        </div>
+                        <div>
+                            <p className='text-sm py-1 mt-4'>Description</p>
+                            <textarea cols={3} rows={4} className='px-6 rounded-md py-1 bg-white border w-full' />
+                        </div>
+                        <div className="flex flex-row space-x-4 items-center justify-end my-6">
+                            <div className="flex justify-center items-center border px-4 py-2 rounded-md border-black w-28">
+                                <Link href={''} className="font-semibold text-sm">
+                                    Cancel
+                                </Link>
+                            </div>
+                            <button className="bg-black px-4 py-2 w-28 rounded-lg text-white flex justify-center items-center">
+                                Add
+                            </button>
+                        </div>
+                    </Modal>
+                )
+            }
         </>
     )
 }
