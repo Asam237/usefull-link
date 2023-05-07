@@ -8,7 +8,6 @@ import { Items } from "../components/commons/items.commont";
 import { items } from "../data/items";
 import { useState } from "react";
 import { Modal } from "../components/commons/modal.common";
-import Placeholder from "react-select/dist/declarations/src/components/Placeholder";
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Dashboard() {
