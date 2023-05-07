@@ -1,26 +1,24 @@
 import { TeamItemType } from "../types";
-import { TwitterImg } from "./icons";
+import { Me } from "./icons";
 
 export const teams: TeamItemType[] = [
     {
-        role: "Organize your links",
+        role: "Lorem ipsum",
         name: "Abba Sali",
-        description: "Organize related code snippets into folders the same way you manage your file on the computer.",
-        pic: TwitterImg
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores iusto rem magnam quasi nihil.",
+        pic: Me
 
     },
     {
-        role: "Organize your links",
+        role: "Lorem ipsum",
         name: "Abba Sali",
-        description: "Organize related code snippets into folders the same way you manage your file on the computer.",
-        pic: TwitterImg
-
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores iusto rem magnam quasi nihil.",
+        pic: Me
     },
     {
-        role: "Organize your links",
+        role: "Lorem ipsum",
         name: "Abba Sali",
-        description: "Organize related code snippets into folders the same way you manage your file on the computer.",
-        pic: TwitterImg
-
+        pic: Me,
+        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores iusto rem magnam quasi nihil.",
     },
 ]

@@ -12,7 +12,7 @@ export const Teams = () => {
                     The team
                 </p>
             </div>
-            <div className="grid grid-cols-1 mt-12 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
+            <div className="grid grid-cols-1 mt-12 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-x-8">
                 {
                     teams.map((item, index) => {
                         return (
