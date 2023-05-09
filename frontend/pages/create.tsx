@@ -3,10 +3,31 @@ import { AiOutlineCodepen } from "react-icons/ai"
 import { Ubuntu } from "@next/font/google"
 import Link from 'next/link'
 import { Footer } from '../components/commons/footer.common'
+import { useState } from 'react'
+import { AuthService } from '../services/auth.service'
+import { useRouter } from 'next/router'
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 
 export default function Create() {
+    const [fullname, setFullname] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
+
+
+    const create = (e: any) => {
+        e.preventDefault()
+        setLoading(true)
+        return new AuthService().create({ email, fullname, password, userType: "NORMAL" }).then((res: any) => {
+            setLoading(false)
+            if (res.status === 200) {
+                router.push("/login")
+            }
+        })
+    }
+
     return (
         <>
             <Head>
@@ -26,21 +47,20 @@ export default function Create() {
                             <div className='max-w-sm bg-gray-50 px-8 py-6 border'>
                                 <div>
                                     <p className='text-sm py-1'>Email address</p>
-                                    <input type="text" className='px-2 rounded-md py-1 bg-white border lg:w-[20rem]' />
+                                    <input type="email" onChange={(e) => setEmail(e.target.value)} className='px-2 rounded-md py-1 bg-white border lg:w-[20rem]' />
                                 </div>
                                 <div className='mt-4'>
                                     <p className='text-sm py-1'>Full name</p>
-                                    <input type="text" className='px-2 rounded-md py-1 bg-white border lg:w-[20rem]' />
+                                    <input type="text" onChange={(e) => setFullname(e.target.value)} className='px-2 rounded-md py-1 bg-white border lg:w-[20rem]' />
                                 </div>
                                 <div className='mt-4'>
                                     <div className='flex justify-between items-center py-1'>
                                         <p className='text-sm'>Password</p>
-                                        <Link href={""} className='text-xs text-blue-500'>Forgot password?</Link>
                                     </div>
-                                    <input type="password" className='px-2 rounded-md py-1 bg-white border lg:w-[20rem]' />
+                                    <input type="password" onChange={(e) => setPassword(e.target.value)} className='px-2 rounded-md py-1 bg-white border lg:w-[20rem]' />
                                 </div>
                                 <div className='mt-4 flex justify-center items-center'>
-                                    <button className='text-sm text-white bg-green-700 hover:bg-green-900 rounded-md py-2 w-full'>Sign up</button>
+                                    <button onClick={create} className='text-sm text-white bg-green-700 hover:bg-green-900 rounded-md py-2 w-full'>Sign up</button>
                                 </div>
                             </div>
                             <div className='max-w-sm p-4 mt-6'>
