@@ -5,14 +5,18 @@ import { Footer } from "../components/commons/footer.common";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Items } from "../components/commons/items.commont";
 import { items } from "../data/items";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "../components/commons/modal.common";
+import { LinkService } from "../services/links.service";
+import { ItemType } from "../types";
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Dashboard() {
     const [addLinkModal, setAddLinkModal] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const [data, setData] = useState([])
     const [link, setLink] = useState("")
     const handleCancel = () => {
         setAddLinkModal(false)
@@ -20,10 +24,23 @@ export default function Dashboard() {
     const handleAddLink = () => {
         setAddLinkModal(true)
     }
-    const saveLink = () => {
-        console.log("Title: ", title, "Description: ", description, "Link: ", link)
-        setAddLinkModal(false)
+    const saveLink = (e: any) => {
+        e.preventDefault()
+        setLoading(true)
+        return new LinkService().create({ name: title, description, url: link, path: link, report: false, status: "VALID", user: "64537d4458086904b73df263" }).then((res: any) => {
+            setAddLinkModal(false)
+            fetchLink()
+        })
     }
+    const fetchLink = async () => {
+        setLoading(true)
+        return new LinkService().all().then((res: any) => {
+            setData(res.data.links)
+        })
+    }
+    useEffect(() => {
+        fetchLink()
+    }, [])
     return (
         <>
             <Head>
@@ -49,7 +66,7 @@ export default function Dashboard() {
                     <hr className="my-10" />
                     <div className="grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
                         {
-                            items.map((item, index) => {
+                            data.map((item: ItemType, index) => {
                                 return (
                                     <Items key={index} description={item.description} name={item.name} path={item.path} url={item.url} />
                                 )
