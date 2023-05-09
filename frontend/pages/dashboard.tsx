@@ -2,7 +2,6 @@ import Head from "next/head";
 import { Ubuntu } from "@next/font/google"
 import { Header } from "../components/commons/header.common";
 import { Footer } from "../components/commons/footer.common";
-import Link from "next/link";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Items } from "../components/commons/items.commont";
 import { items } from "../data/items";
