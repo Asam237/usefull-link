@@ -1,8 +1,8 @@
 import Link from "next/link"
 import { AiOutlineCodepen, AiOutlineUser } from "react-icons/ai"
 import { headers } from "../../data/header"
-import { useRecoilValue } from "recoil"
-import { authState, fullnameState } from "../../atoms/auth"
+import { useRecoilState, useRecoilValue } from "recoil"
+import { authState } from "../../atoms/auth"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -10,16 +10,19 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu'
+import { fullnameState } from "../../atoms/infos"
 
 
 export const Header = () => {
     const userToken = useRecoilValue(authState)
+    const [newUserToken, setNewUserToken] = useRecoilState(authState)
     const userFullname = useRecoilValue(fullnameState)
 
     const profile = () => {
         console.log('profile')
     }
     const logout = () => {
+        setNewUserToken("");
         console.log('logout')
     }
 

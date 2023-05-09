@@ -7,7 +7,8 @@ import { useState } from 'react'
 import { AuthService } from '../services/auth.service'
 import { useRouter } from "next/router"
 import { useRecoilState } from "recoil"
-import { authState, fullnameState } from '../atoms/auth'
+import { authState } from '../atoms/auth'
+import { fullnameState } from '../atoms/infos'
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 
@@ -28,6 +29,7 @@ export default function Login() {
             if (res.status === 200) {
                 setUserToken(res.data.token)
                 setFullname(res.data.fullname)
+                localStorage.setItem("LOGIN", res.data.token)
                 router.push("/")
             } if (res.status === 403) {
                 // console.log("Hello World")
