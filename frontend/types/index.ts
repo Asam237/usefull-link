@@ -49,7 +49,7 @@ export type ItemType = {
     description: String
     url: String
     path: String
-    report: Boolean
-    status: String
-    user: any
+    report?: Boolean
+    status?: String
+    user?: any
 }

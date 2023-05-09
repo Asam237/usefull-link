@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Ubuntu } from "@next/font/google"
 import { Header } from "../components/commons/header.common";
 import { Footer } from "../components/commons/footer.common";
+import { BiTrash } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Items } from "../components/commons/items.commont";
 import { items } from "../data/items";
@@ -64,13 +65,17 @@ export default function Dashboard() {
                         </div>
                     </div>
                     <hr className="my-10" />
-                    <div className="grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className={`${data.length === 0 ? 'sm:grid-cols-1 lg:grid-cols-1' : 'sm:grid-cols-2 lg:grid-cols-3'} grid gap-x-4 gap-y-10 `}>
                         {
-                            data.map((item: ItemType, index) => {
-                                return (
-                                    <Items key={index} description={item.description} name={item.name} path={item.path} url={item.url} />
-                                )
-                            })
+                            data.length === 0 ? <div className="flex justify-center items-center flex-col mx-auto">
+                                <BiTrash size={50} />
+                                <h4 className="my-4 text-sm">Vide</h4>
+                            </div> :
+                                data.map((item: ItemType, index) => {
+                                    return (
+                                        <Items key={index} description={item.description} name={item.name} path={item.path} url={item.url} />
+                                    )
+                                })
                         }
                     </div>
                 </main>
