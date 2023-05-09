@@ -1,24 +1,24 @@
 import { TeamItemType } from "../types";
-import { Me } from "./icons";
+import { User } from "./icons";
 
 export const teams: TeamItemType[] = [
     {
         role: "Lorem ipsum",
         name: "Abba Sali",
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores iusto rem magnam quasi nihil.",
-        pic: Me
+        pic: User
 
     },
     {
         role: "Lorem ipsum",
-        name: "Abba Sali",
+        name: "Martien Gardier",
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores iusto rem magnam quasi nihil.",
-        pic: Me
+        pic: User
     },
     {
         role: "Lorem ipsum",
-        name: "Abba Sali",
-        pic: Me,
+        name: "Charles Le Duc",
+        pic: User,
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores iusto rem magnam quasi nihil.",
     },
 ]
