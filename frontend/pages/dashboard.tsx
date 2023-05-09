@@ -12,6 +12,9 @@ import { Modal } from "../components/commons/modal.common";
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Dashboard() {
     const [addLinkModal, setAddLinkModal] = useState(false)
+    const handleCancel = () => {
+        setAddLinkModal(false)
+    }
     const handleAddLink = () => {
         setAddLinkModal(true)
     }
@@ -32,7 +35,7 @@ export default function Dashboard() {
                         </h1>
                         <p className="leading-7 max-w-xl mx-auto text-gray-600 mt-6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, dolores! Modi culpa nisi cum corrupti.</p>
                         <div className="mt-10 flex">
-                            <button onClick={handleAddLink} className="bg-black h-12 w-64 lg:w-52 rounded-lg text-white flex justify-center items-center hover:text-gray-900 hover:bg-white hover:border hover:border-black">
+                            <button onClick={handleAddLink} className="bg-black h-12 w-64 lg:w-52 rounded-lg text-white flex justify-center items-center hover:shadow-2xl">
                                 <AiOutlinePlus size={20} className="mr-2" />  Add new link
                             </button>
                         </div>
@@ -70,9 +73,9 @@ export default function Dashboard() {
                         </div>
                         <div className="flex flex-row space-x-4 items-center justify-end my-6">
                             <div className="flex justify-center items-center border px-4 py-2 rounded-md border-black w-28">
-                                <Link href={''} className="font-semibold text-sm">
+                                <button onClick={handleCancel} className="font-semibold text-sm">
                                     Cancel
-                                </Link>
+                                </button>
                             </div>
                             <button className="bg-black px-4 py-2 w-28 rounded-lg text-white flex justify-center items-center">
                                 Add
