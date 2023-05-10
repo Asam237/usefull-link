@@ -9,4 +9,7 @@ export class LinkService extends DataService {
     create = (data: ItemType) => {
         return this.post('/links/create', data)
     }
+    destroy = (id: any) => {
+        return this.delete(`/links/${id}`)
+    }
 }

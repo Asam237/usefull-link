@@ -9,3 +9,8 @@ export const authId = atom({
     key: 'auth-id',
     default: ''
 })
+
+export const userTypeState = atom({
+    key: 'user-type-state',
+    default: ''
+})

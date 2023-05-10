@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { AuthService } from '../services/auth.service'
 import { useRouter } from "next/router"
 import { useRecoilState } from "recoil"
-import { authId, authState } from '../atoms/auth'
+import { authId, authState, userTypeState } from '../atoms/auth'
 import { fullnameState } from '../atoms/infos'
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
@@ -19,6 +19,7 @@ export default function Login() {
     const [password, setPassword] = useState("")
     const [userToken, setUserToken] = useRecoilState(authState)
     const [myAuthId, setMyAuthId] = useRecoilState(authId)
+    const [userType, setUserType] = useRecoilState(userTypeState)
     const [fullname, setFullname] = useRecoilState(fullnameState)
     const router = useRouter()
 
@@ -30,6 +31,7 @@ export default function Login() {
             if (res.status === 200) {
                 setUserToken(res.data.token)
                 setMyAuthId(res.data._id)
+                setUserType(res.data.userType)
                 setFullname(res.data.fullname)
                 router.push("/")
             } if (res.status === 403) {

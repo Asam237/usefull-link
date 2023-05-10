@@ -2,7 +2,7 @@ import Link from "next/link"
 import { AiOutlineCodepen, AiOutlineUser } from "react-icons/ai"
 import { headers } from "../../data/header"
 import { useRecoilState, useRecoilValue } from "recoil"
-import { authState } from "../../atoms/auth"
+import { authState, userTypeState } from "../../atoms/auth"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -18,6 +18,7 @@ export const Header = () => {
     const userToken = useRecoilValue(authState)
     const [newUserToken, setNewUserToken] = useRecoilState(authState)
     const userFullname = useRecoilValue(fullnameState)
+    const userType = useRecoilValue(userTypeState)
     const router = useRouter()
 
     const profile = () => {
@@ -47,33 +48,66 @@ export const Header = () => {
                         </ul>
                     </div>
                     {userToken.length > 50 ?
-                        <div className="flex justify-center items-center underline underline-offset-4">
-                            <DropdownMenu>
-                                <DropdownMenuTrigger className="outline-none">
-                                    <div className="flex flex-row text-primary font-bold items-center text-sm">
-                                        <AiOutlineUser size={24} className="mr-2" /> {userFullname}
-                                    </div>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent
-                                    sideOffset={5}
-                                    className="bg-white shadow-sm border min-w-[150px] rounded text-sm"
-                                >
-                                    <DropdownMenuItem
-                                        onClick={profile}
-                                        className="px-3 py-1 outline-none cursor-pointer flex gap-2 items-center hover:bg-gray-100"
+                        userType === "NORMAL" ?
+                            < div className="flex justify-center items-center underline underline-offset-4">
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger className="outline-none">
+                                        <div className="flex flex-row text-primary font-bold items-center text-sm">
+                                            <AiOutlineUser size={24} className="mr-2" /> {userFullname}
+                                        </div>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent
+                                        sideOffset={5}
+                                        className="bg-white shadow-sm border min-w-[150px] rounded text-sm"
                                     >
-                                        Profile
-                                    </DropdownMenuItem>
-                                    <DropdownMenuSeparator className="border-t" />
-                                    <DropdownMenuItem
-                                        onClick={logout}
-                                        className="px-3 py-1 outline-none cursor-pointer flex gap-2 items-center text-red-600 hover:bg-red-50"
+                                        <DropdownMenuItem
+                                            onClick={profile}
+                                            className="px-3 py-1 outline-none cursor-pointer flex gap-2 items-center hover:bg-gray-100"
+                                        >
+                                            Profile
+                                        </DropdownMenuItem>
+                                        <DropdownMenuSeparator className="border-t" />
+                                        <DropdownMenuItem
+                                            onClick={logout}
+                                            className="px-3 py-1 outline-none cursor-pointer flex gap-2 items-center text-red-600 hover:bg-red-50"
+                                        >
+                                            Deconnexion
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            </div> :
+                            < div className="flex justify-center items-center">
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger className="outline-none">
+                                        <div className="flex flex-row text-primary font-bold items-center text-sm">
+                                            <AiOutlineUser size={24} className="mr-2" /> {userFullname}
+                                        </div>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent
+                                        sideOffset={5}
+                                        className="bg-white shadow-sm border min-w-[150px] rounded text-sm"
                                     >
-                                        Deconnexion
-                                    </DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                        </div>
+                                        <DropdownMenuItem
+                                            onClick={profile}
+                                            className="px-3 py-1 outline-none cursor-pointer flex gap-2 items-center hover:bg-gray-100"
+                                        >
+                                            Profile
+                                        </DropdownMenuItem>
+                                        <DropdownMenuSeparator className="border-t" />
+                                        <DropdownMenuItem
+                                            onClick={logout}
+                                            className="px-3 py-1 outline-none cursor-pointer flex gap-2 items-center text-red-600 hover:bg-red-50"
+                                        >
+                                            Deconnexion
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                                <div className="flex justify-center items-center border px-4 py-2 rounded-md border-black hover:bg-black hover:text-white ml-4">
+                                    <Link href={'/administration'} className="font-semibold text-sm">
+                                        Administration
+                                    </Link>
+                                </div>
+                            </div>
                         :
                         <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 mt-4 lg:mt-0">
                             <div className="flex justify-center items-center">
