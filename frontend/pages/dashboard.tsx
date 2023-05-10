@@ -5,17 +5,19 @@ import { Footer } from "../components/commons/footer.common";
 import { BiTrash } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Items } from "../components/commons/items.commont";
-import { items } from "../data/items";
 import { useEffect, useState } from "react";
 import { Modal } from "../components/commons/modal.common";
 import { LinkService } from "../services/links.service";
 import { ItemType } from "../types";
+import { useRecoilValue } from "recoil";
+import { authId } from "../atoms/auth";
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Dashboard() {
     const [addLinkModal, setAddLinkModal] = useState(false)
     const [loading, setLoading] = useState(false)
     const [title, setTitle] = useState("")
+    const id = useRecoilValue(authId)
     const [description, setDescription] = useState("")
     const [data, setData] = useState([])
     const [link, setLink] = useState("")
@@ -28,7 +30,7 @@ export default function Dashboard() {
     const saveLink = (e: any) => {
         e.preventDefault()
         setLoading(true)
-        return new LinkService().create({ name: title, description, url: link, path: link, report: false, status: "VALID", user: "64537d4458086904b73df263" }).then((res: any) => {
+        return new LinkService().create({ name: title, description, url: link, path: link, report: false, status: "VALID", user: id }).then((res: any) => {
             setAddLinkModal(false)
             fetchLink()
         })

@@ -10,6 +10,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu'
+import { useRouter } from "next/router"
 import { fullnameState } from "../../atoms/infos"
 
 
@@ -17,13 +18,14 @@ export const Header = () => {
     const userToken = useRecoilValue(authState)
     const [newUserToken, setNewUserToken] = useRecoilState(authState)
     const userFullname = useRecoilValue(fullnameState)
+    const router = useRouter()
 
     const profile = () => {
         console.log('profile')
     }
     const logout = () => {
         setNewUserToken("");
-        console.log('logout')
+        router.push("/")
     }
 
     return (
