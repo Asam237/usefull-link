@@ -44,6 +44,19 @@ class LinkController {
       console.log(error);
     }
   }
+  public static async destroy(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<any> {
+    const id = req.params.id;
+    try {
+      await LinkModel.deleteOne({ _id: id });
+      return res.json({ message: "Link delete success !" });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export { LinkController };

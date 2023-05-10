@@ -21,6 +21,7 @@ class LinkRoute {
     );
     this.router.get(`${prefix}/all`, LinkController.all);
     this.router.get(`${prefix}/:id`, LinkController.one);
+    this.router.delete(`${prefix}/:id`, LinkController.destroy);
   };
 }
 
