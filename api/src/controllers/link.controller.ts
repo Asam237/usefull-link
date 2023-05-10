@@ -14,6 +14,7 @@ class LinkController {
       const linkParams: any = { name, description, url, report, status, user };
       const link: any = new LinkModel(linkParams);
       user.links.push(link._id);
+      await user.save();
       await link.save();
       return res.status(200).json({ user });
     } catch (error) {

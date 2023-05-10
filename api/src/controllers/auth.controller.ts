@@ -4,6 +4,7 @@ import * as jwt from "jsonwebtoken";
 import { UserModel } from "../models/user.model";
 import { TokenInfo } from "../core/types";
 import { EXPIRES, JWT_SECRET } from "../core/config";
+import { LinkModel } from "../models/link.model";
 
 class AuthController {
   public static async create(
