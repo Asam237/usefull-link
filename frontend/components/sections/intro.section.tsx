@@ -1,10 +1,7 @@
 import Link from "next/link"
-import { AiOutlineCode, AiOutlineLink, AiOutlineUser } from "react-icons/ai"
-import { useRecoilValue } from "recoil"
-import { authState } from "../../atoms/auth"
+import { AiOutlineCode, AiOutlineLink } from "react-icons/ai"
 
 export const Intro = () => {
-    const userToken = useRecoilValue(authState)
     return (
         <section className={`text-md`}>
             <div className="flex justify-center items-center flex-col text-center">
@@ -16,7 +13,7 @@ export const Intro = () => {
                     <Link href={""} className="bg-black h-12 w-64 lg:w-52 rounded-lg text-white flex justify-center items-center hover:shadow-2xl">
                         <AiOutlineLink size={24} className="mr-2" />  Explore link
                     </Link>
-                    {
+                    {/* {
                         userToken.length > 50 ?
                             <Link href={"/dashboard"} className="border-gray-900 border h-12 w-64 lg:w-52 rounded-lg text-gray-900 flex justify-center items-center hover:shadow-md hover:shadow-gray-400">
                                 <AiOutlineCode size={24} className="mr-2" />
@@ -27,7 +24,11 @@ export const Intro = () => {
                                 Sign in
                             </Link>
 
-                    }
+                    } */}
+                    <Link href={"/dashboard"} className="border-gray-900 border h-12 w-64 lg:w-52 rounded-lg text-gray-900 flex justify-center items-center hover:shadow-md hover:shadow-gray-400">
+                        <AiOutlineCode size={24} className="mr-2" />
+                        Your dashboard
+                    </Link>
                 </div>
             </div>
         </section>

@@ -9,15 +9,12 @@ import { useEffect, useState } from "react";
 import { Modal } from "../components/commons/modal.common";
 import { LinkService } from "../services/links.service";
 import { ItemType } from "../types";
-import { useRecoilValue } from "recoil";
-import { authId } from "../atoms/auth";
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Dashboard() {
     const [addLinkModal, setAddLinkModal] = useState(false)
     const [loading, setLoading] = useState(false)
     const [title, setTitle] = useState("")
-    const id = useRecoilValue(authId)
     const [description, setDescription] = useState("")
     const [data, setData] = useState([])
     const [link, setLink] = useState("")
@@ -30,7 +27,7 @@ export default function Dashboard() {
     const saveLink = (e: any) => {
         e.preventDefault()
         setLoading(true)
-        return new LinkService().create({ name: title, description, url: link, path: link, report: false, status: "VALID", user: id }).then((res: any) => {
+        return new LinkService().create({ name: title, description, url: link, path: link, report: false, status: "VALID", user: "iibadbiab" }).then((res: any) => {
             setAddLinkModal(false)
             fetchLink()
         })

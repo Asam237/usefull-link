@@ -6,12 +6,9 @@ import { Feature } from '../components/sections/feature.section'
 import { Intro } from '../components/sections/intro.section'
 import { Teams } from '../components/sections/teams.section'
 import { Ubuntu } from "@next/font/google"
-import { useRecoilValue } from "recoil"
-import { authState } from '../atoms/auth'
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Home() {
-  const userToken = useRecoilValue(authState)
   return (
     <>
       <Head>
