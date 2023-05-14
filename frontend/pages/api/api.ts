@@ -20,3 +20,11 @@ export const getAll = async () => {
 export const createLink = async (data: any) => {
     return await api.post("/links/create", data)
 }
+
+export const destroyLink = async (id: any) => {
+    return await api.delete(`/links/${id}`)
+}
+
+export const getOneLink = async (id: any) => {
+    return await api.get(`/links/${id}`).then((res) => res.data)
+}
