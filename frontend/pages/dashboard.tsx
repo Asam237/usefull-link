@@ -5,19 +5,27 @@ import { Footer } from "../components/commons/footer.common";
 import { BiTrash } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Items } from "../components/commons/items.commont";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Modal } from "../components/commons/modal.common";
 import { LinkService } from "../services/links.service";
 import { ItemType } from "../types";
+import { useQuery } from "@tanstack/react-query";
+import { getAll } from "./api/api";
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Dashboard() {
     const [addLinkModal, setAddLinkModal] = useState(false)
-    const [loading, setLoading] = useState(false)
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-    const [data, setData] = useState([])
     const [link, setLink] = useState("")
+
+    const queryKey = ["links"]
+    const { isLoading, error, data } = useQuery({
+        queryKey,
+        queryFn: () => getAll()
+    })
+    const links = data || []
+
     const handleCancel = () => {
         setAddLinkModal(false)
     }
@@ -26,21 +34,12 @@ export default function Dashboard() {
     }
     const saveLink = (e: any) => {
         e.preventDefault()
-        setLoading(true)
         return new LinkService().create({ name: title, description, url: link, path: link, report: false, status: "VALID", user: "iibadbiab" }).then((res: any) => {
             setAddLinkModal(false)
-            fetchLink()
+            // fetchLink()
         })
     }
-    const fetchLink = async () => {
-        setLoading(true)
-        return new LinkService().all().then((res: any) => {
-            setData(res.data.links)
-        })
-    }
-    useEffect(() => {
-        fetchLink()
-    }, [])
+
     return (
         <>
             <Head>
@@ -64,13 +63,23 @@ export default function Dashboard() {
                         </div>
                     </div>
                     <hr className="my-10" />
-                    <div className={`${data.length === 0 ? 'sm:grid-cols-1 lg:grid-cols-1' : 'sm:grid-cols-2 lg:grid-cols-3'} grid gap-x-4 gap-y-10 `}>
+                    {isLoading && (
+                        <div>
+                            Loading..
+                        </div>
+                    )}
+                    {error && (
+                        <div>
+                            Error..
+                        </div>
+                    )}
+                    <div className={`${links?.length === 0 ? 'sm:grid-cols-1 lg:grid-cols-1' : 'sm:grid-cols-2 lg:grid-cols-3'} grid gap-x-4 gap-y-10 `}>
                         {
-                            data.length === 0 ? <div className="flex justify-center items-center flex-col mx-auto">
+                            links?.length === 0 ? <div className="flex justify-center items-center flex-col mx-auto">
                                 <BiTrash size={50} />
                                 <h4 className="my-4 text-sm">Vide</h4>
                             </div> :
-                                data.map((item: ItemType, index) => {
+                                links?.map((item: ItemType, index: any) => {
                                     return (
                                         <Items key={index} description={item.description} name={item.name} path={item.path} url={item.url} />
                                     )

@@ -6,9 +6,6 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { AuthService } from '../services/auth.service'
 import { useRouter } from "next/router"
-import { useRecoilState } from "recoil"
-import { authId, authState, userTypeState } from '../atoms/auth'
-import { fullnameState } from '../atoms/infos'
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 
@@ -17,10 +14,6 @@ export default function Login() {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [userToken, setUserToken] = useRecoilState(authState)
-    const [myAuthId, setMyAuthId] = useRecoilState(authId)
-    const [userType, setUserType] = useRecoilState(userTypeState)
-    const [fullname, setFullname] = useRecoilState(fullnameState)
     const router = useRouter()
 
     const login = (e: any) => {
@@ -29,11 +22,7 @@ export default function Login() {
         return new AuthService().login({ email, password }).then((res: any) => {
             setLoading(false)
             if (res.status === 200) {
-                setUserToken(res.data.token)
-                setMyAuthId(res.data._id)
-                setUserType(res.data.userType)
-                setFullname(res.data.fullname)
-                router.push("/")
+                router.push("/dashboard")
             } if (res.status === 403) {
                 // console.log("Hello World")
             }
