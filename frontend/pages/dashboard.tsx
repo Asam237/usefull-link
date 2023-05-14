@@ -7,37 +7,44 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { Items } from "../components/commons/items.commont";
 import { useState } from "react";
 import { Modal } from "../components/commons/modal.common";
-import { LinkService } from "../services/links.service";
 import { ItemType } from "../types";
-import { useQuery } from "@tanstack/react-query";
-import { getAll } from "./api/api";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { createLink, getAll } from "./api/api";
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Dashboard() {
+
     const [addLinkModal, setAddLinkModal] = useState(false)
-    const [title, setTitle] = useState("")
+    const [name, setName] = useState("")
     const [description, setDescription] = useState("")
-    const [link, setLink] = useState("")
+    const [url, setUrl] = useState("")
+    const addLink: any = { name, description, url, user: "64520eeb054e147ae084ff82" }
 
     const queryKey = ["links"]
+    const queryClient = useQueryClient()
+    const createLinkMutation = useMutation({
+        mutationFn: createLink,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["links"] })
+        }
+    })
     const { isLoading, error, data } = useQuery({
         queryKey,
         queryFn: () => getAll()
     })
     const links = data || []
 
+    const handleLink = (e: any) => {
+        e.preventDefault()
+        createLinkMutation.mutate(addLink)
+        setAddLinkModal(false)
+    }
+
     const handleCancel = () => {
         setAddLinkModal(false)
     }
     const handleAddLink = () => {
         setAddLinkModal(true)
-    }
-    const saveLink = (e: any) => {
-        e.preventDefault()
-        return new LinkService().create({ name: title, description, url: link, path: link, report: false, status: "VALID", user: "iibadbiab" }).then((res: any) => {
-            setAddLinkModal(false)
-            // fetchLink()
-        })
     }
 
     return (
@@ -95,28 +102,30 @@ export default function Dashboard() {
                         onClose={() => setAddLinkModal(false)}
                         title="New link"
                     >
-                        <div>
-                            <p className='text-sm py-1'>Title</p>
-                            <input type="text" className='px-6 rounded-md py-1 bg-white border w-full' onChange={(e) => setTitle(e.target.value)} />
-                        </div>
-                        <div>
-                            <p className='text-sm py-1 mt-4'>Link</p>
-                            <input type="text" className='px-6 rounded-md py-1 bg-white border w-full' onChange={(e) => setLink(e.target.value)} />
-                        </div>
-                        <div>
-                            <p className='text-sm py-1 mt-4'>Description</p>
-                            <textarea cols={3} rows={4} className='px-6 rounded-md py-1 bg-white border w-full' onChange={(e) => setDescription(e.target.value)} />
-                        </div>
-                        <div className="flex flex-row space-x-4 items-center justify-end my-6">
-                            <div className="flex justify-center items-center border px-4 py-2 rounded-md border-black w-28">
-                                <button onClick={handleCancel} className="font-semibold text-sm">
-                                    Cancel
+                        <form onSubmit={handleLink}>
+                            <div>
+                                <p className='text-sm py-1'>Title</p>
+                                <input type="text" className='px-6 rounded-md py-1 bg-white border w-full' onChange={(e) => setName(e.target.value)} />
+                            </div>
+                            <div>
+                                <p className='text-sm py-1 mt-4'>Link</p>
+                                <input type="text" className='px-6 rounded-md py-1 bg-white border w-full' onChange={(e) => setUrl(e.target.value)} />
+                            </div>
+                            <div>
+                                <p className='text-sm py-1 mt-4'>Description</p>
+                                <textarea cols={3} rows={4} className='px-6 rounded-md py-1 bg-white border w-full' onChange={(e) => setDescription(e.target.value)} />
+                            </div>
+                            <div className="flex flex-row space-x-4 items-center justify-end my-6">
+                                <div className="flex justify-center items-center border px-4 py-2 rounded-md border-black w-28">
+                                    <button onClick={handleCancel} className="font-semibold text-sm">
+                                        Cancel
+                                    </button>
+                                </div>
+                                <button type="submit" className="bg-black px-4 py-2 w-28 rounded-lg text-white flex justify-center items-center">
+                                    Add
                                 </button>
                             </div>
-                            <button onClick={saveLink} className="bg-black px-4 py-2 w-28 rounded-lg text-white flex justify-center items-center">
-                                Add
-                            </button>
-                        </div>
+                        </form>
                     </Modal>
                 )
             }
