@@ -1,19 +1,35 @@
-import { link } from "fs";
 import Link from "next/link";
 import { useState } from "react";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai"
 import { ItemType } from "../../types";
 import { Modal } from "./modal.common";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { destroyLink } from "../../pages/api/api";
 
-export const Items = ({ name, description, url, path }: ItemType) => {
+export const Items = ({ _id, name, description, url, path }: ItemType) => {
     const [deleteLinkModal, setDeleteLinkModal] = useState(false)
     const [editLinkModal, setEditLinkModal] = useState(false)
     const [editTitle, setEditTitle] = useState(name)
     const [editDescription, setEditDescription] = useState(description)
     const [editLink, setEditLink] = useState(url)
+    const clientQuery = useQueryClient()
+
+    const deleteLinkMutation = useMutation({
+        mutationFn: destroyLink,
+        onSuccess: () => {
+            clientQuery.invalidateQueries({ queryKey: ['links'] })
+        }
+    })
+
+
+    const handleDestroyLink = async () => {
+        deleteLinkMutation.mutate(_id)
+        setDeleteLinkModal(false)
+    }
 
     const handleCancel = () => {
         setEditLinkModal(false)
+        setDeleteLinkModal(false)
     }
 
     const handleDeleteLink = () => {
@@ -49,8 +65,17 @@ export const Items = ({ name, description, url, path }: ItemType) => {
                         onClose={() => setDeleteLinkModal(false)}
                         title="Delete link">
                         <div>
-                            <p className='text-sm py-1'>Title</p>
-                            <input type="text" className='px-6 rounded-md py-1 bg-white border w-full' />
+                            <p className='text-sm py-1'>Delete Link</p>
+                        </div>
+                        <div className="flex flex-row space-x-4 items-center justify-end my-6">
+                            <div className="flex justify-center items-center border px-4 py-2 rounded-md border-black w-28">
+                                <button onClick={handleCancel} className="font-semibold text-sm">
+                                    Cancel
+                                </button>
+                            </div>
+                            <button onClick={() => handleDestroyLink()} className="bg-red-500 px-4 py-2 w-28 rounded-lg text-white flex justify-center items-center">
+                                Delete
+                            </button>
                         </div>
                     </Modal>
                 )

@@ -88,7 +88,7 @@ export default function Dashboard() {
                             </div> :
                                 links?.map((item: ItemType, index: any) => {
                                     return (
-                                        <Items key={index} description={item.description} name={item.name} path={item.path} url={item.url} />
+                                        <Items key={index} _id={item?._id} description={item.description} name={item.name} path={item.path} url={item.url} />
                                     )
                                 })
                         }

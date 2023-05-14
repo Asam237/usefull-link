@@ -26,5 +26,5 @@ export const destroyLink = async (id: any) => {
 }
 
 export const getOneLink = async (id: any) => {
-    return await api.get(`/links/${id}`).then((res) => res.data)
+    return await api.get(`/links/${id}`).then((res) => res.data.link)
 }
