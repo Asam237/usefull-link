@@ -9,7 +9,7 @@ class UserRoute {
   }
   routes = () => {
     const prefix: string = "/users";
-    this.router.get(`${prefix}/all`, UserController.all);
+    this.router.get(`${prefix}/:id`, UserController.me);
   };
 }
 
