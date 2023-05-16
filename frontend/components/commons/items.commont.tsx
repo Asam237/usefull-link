@@ -4,7 +4,7 @@ import { AiFillEdit, AiFillDelete } from "react-icons/ai"
 import { ItemType } from "../../types";
 import { Modal } from "./modal.common";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { destroyLink } from "../../pages/api/api";
+import { destroyLink } from "../../pages/api";
 
 export const Items = ({ _id, name, description, url, path }: ItemType) => {
     const [deleteLinkModal, setDeleteLinkModal] = useState(false)

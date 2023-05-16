@@ -9,7 +9,7 @@ import { useState } from "react";
 import { Modal } from "../components/commons/modal.common";
 import { ItemType } from "../types";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { createLink, getAll } from "./api/api";
+import { createLink, getAll } from "./api";
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Dashboard() {
@@ -20,8 +20,8 @@ export default function Dashboard() {
     const [url, setUrl] = useState("")
     const addLink: any = { name, description, url, user: "64520eeb054e147ae084ff82" }
 
-    const queryKey = ["links"]
     const queryClient = useQueryClient()
+    // console.log("Query CLient ===>", queryClient.getQueriesData({ queryKey: ["links"] })[0][1][0])
     const createLinkMutation = useMutation({
         mutationFn: createLink,
         onSuccess: () => {
@@ -29,7 +29,7 @@ export default function Dashboard() {
         }
     })
     const { isLoading, error, data } = useQuery({
-        queryKey,
+        queryKey: ["links"],
         queryFn: () => getAll()
     })
     const links = data || []

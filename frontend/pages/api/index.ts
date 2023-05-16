@@ -5,8 +5,8 @@ const api = axios.create({
     baseURL: "http://localhost:5200",
 })
 
-export const login = async (data: AuthLoginType) => {
-    return await api.post("/login", data)
+export const authLogin = async (data: AuthLoginType) => {
+    return await api.post("/auth/login", data)
 }
 
 export const create = async (data: AuthCreateType) => {
@@ -27,4 +27,8 @@ export const destroyLink = async (id: any) => {
 
 export const getOneLink = async (id: any) => {
     return await api.get(`/links/${id}`).then((res) => res.data.link)
+}
+
+export const me = async (id: any) => {
+    return await api.get(`/users/${id}`).then((res) =>res.data.data.user)
 }
