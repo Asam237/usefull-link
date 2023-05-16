@@ -52,5 +52,6 @@ export type ItemType = {
     path: String
     report?: Boolean
     status?: String
+    createdAt?: any
     user?: any
 }

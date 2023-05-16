@@ -6,7 +6,7 @@ import { Modal } from "./modal.common";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { destroyLink } from "../../pages/api";
 
-export const Items = ({ _id, name, description, url, path }: ItemType) => {
+export const Items = ({ _id, name, description, url, path, createdAt }: ItemType) => {
     const [deleteLinkModal, setDeleteLinkModal] = useState(false)
     const [editLinkModal, setEditLinkModal] = useState(false)
     const [editTitle, setEditTitle] = useState(name)
@@ -53,9 +53,10 @@ export const Items = ({ _id, name, description, url, path }: ItemType) => {
                 <p className="leading-loose truncate">
                     <Link target={"_blank"} className="text-clip text-sm text-blue-600 font-semibold underline truncate underline-offset-4 hover:text-blue-800" href={""}>{url}</Link>
                 </p>
+                <p className="italic underline underline-offset-4 text-xs py-4 text-gray-500">{new Date(createdAt).toDateString()}</p>
                 <hr className="my-3" />
                 <div className="flex justify-between items-center">
-                    <AiFillEdit className="cursor-pointer" size={24} onClick={handleEditLink} color="blue" />
+                    <AiFillEdit className="cursor-pointer" size={24} onClick={handleEditLink} color="gray" />
                     <AiFillDelete className="cursor-pointer" onClick={handleDeleteLink} size={24} color="red" />
                 </div>
             </div>

@@ -17,7 +17,7 @@ export const Intro = () => {
                 </h1>
                 <p className="leading-7 max-w-md mx-auto text-gray-600 mt-6">We build products to help developers to save a link</p>
                 <div className="mt-10 flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
-                    <Link href={""} className="bg-black h-12 w-64 lg:w-52 rounded-lg text-white flex justify-center items-center hover:shadow-2xl">
+                    <Link href={"/explore"} className="bg-black h-12 w-64 lg:w-52 rounded-lg text-white flex justify-center items-center hover:shadow-2xl">
                         <AiOutlineLink size={24} className="mr-2" />  Explore link
                     </Link>
                     {

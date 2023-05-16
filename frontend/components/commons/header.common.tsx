@@ -20,10 +20,9 @@ export const Header = () => {
     const user: any = mutation?.state?.data.data
 
     const router = useRouter()
-    const profile = () => {
-        console.log('profile')
-    }
+
     const logout = () => {
+        queryClient.clear()
         router.push("/")
     }
 
@@ -35,7 +34,7 @@ export const Header = () => {
                         <Link href={"/"}>
                             <AiOutlineCodepen size={40} />
                         </Link>
-                        <ul className="ml-4">
+                        <ul className={`ml-4`}>
                             {
                                 headers.map((item, index) => {
                                     return (
@@ -45,7 +44,7 @@ export const Header = () => {
                             }
                         </ul>
                     </div>
-                    {user?.token.length > 50 ?
+                    {user?.token ?
                         user.userType === "NORMAL" ?
                             < div className="flex justify-center items-center underline underline-offset-4">
                                 <DropdownMenu>
@@ -58,12 +57,6 @@ export const Header = () => {
                                         sideOffset={5}
                                         className="bg-white shadow-sm border min-w-[150px] rounded text-sm"
                                     >
-                                        <DropdownMenuItem
-                                            onClick={profile}
-                                            className="px-3 py-1 outline-none cursor-pointer flex gap-2 items-center hover:bg-gray-100"
-                                        >
-                                            Profile
-                                        </DropdownMenuItem>
                                         <DropdownMenuSeparator className="border-t" />
                                         <DropdownMenuItem
                                             onClick={logout}
@@ -85,12 +78,6 @@ export const Header = () => {
                                         sideOffset={5}
                                         className="bg-white shadow-sm border min-w-[150px] rounded text-sm"
                                     >
-                                        <DropdownMenuItem
-                                            onClick={profile}
-                                            className="px-3 py-1 outline-none cursor-pointer flex gap-2 items-center hover:bg-gray-100"
-                                        >
-                                            Profile
-                                        </DropdownMenuItem>
                                         <DropdownMenuSeparator className="border-t" />
                                         <DropdownMenuItem
                                             onClick={logout}

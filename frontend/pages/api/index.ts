@@ -13,8 +13,13 @@ export const createUser = async (data: AuthCreateType) => {
     return await api.post("/auth/create", data)
 }
 
-export const getAll = async () => {
-    return await api.get("/links/all").then((res) => res.data.links)
+export const getAll = async (token: any) => {
+    api.defaults.headers.common = { 'Authorization': 'Bearer ' + token }
+    return await api.get("/links/all").then((res) => res.data)
+}
+
+export const getAllLink = async () => {
+    return await api.get("/links").then((res) => res.data)
 }
 
 export const createLink = async (data: any) => {
@@ -30,5 +35,5 @@ export const getOneLink = async (id: any) => {
 }
 
 export const me = async (id: any) => {
-    return await api.get(`/users/${id}`).then((res) =>res.data.data.user)
+    return await api.get(`/users/${id}`).then((res) => res.data.data.user)
 }
