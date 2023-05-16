@@ -53,5 +53,6 @@ export type ItemType = {
     report?: Boolean
     status?: String
     createdAt?: any
+    publicLink?: boolean
     user?: any
 }

@@ -14,3 +14,14 @@ export const headers: HeaderItemType[] = [
         path: "#faq"
     },
 ]
+
+export const headersLog = [
+    {
+        name: "Explore",
+        path: "/explore"
+    },
+    {
+        name: "Dashboard",
+        path: "/dashboard"
+    },
+]

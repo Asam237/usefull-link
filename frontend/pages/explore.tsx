@@ -73,7 +73,7 @@ export default function Dashboard() {
                                     </div> :
                                         links?.map((item: ItemType, index: any) => {
                                             return (
-                                                <Items key={index} _id={item?._id} description={item.description} name={item.name} path={item.path} url={item.url} createdAt={item.createdAt} />
+                                                <Items key={index} _id={item?._id} description={item.description} name={item.name} path={item.path} url={item.url} publicLink={false} createdAt={item.createdAt} />
                                             )
                                         })
                                 }

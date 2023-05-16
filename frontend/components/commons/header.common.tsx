@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { AiOutlineCodepen, AiOutlineUser } from "react-icons/ai"
-import { headers } from "../../data/header"
+import { headers, headersLog } from "../../data/header"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -34,15 +34,28 @@ export const Header = () => {
                         <Link href={"/"}>
                             <AiOutlineCodepen size={40} />
                         </Link>
-                        <ul className={`ml-4`}>
-                            {
-                                headers.map((item, index) => {
-                                    return (
-                                        <Link className="my-2 text-sm mx-2 font-medium hover:underline hover:underline-offset-4 hover:font-semibold" href={item.path} key={index}>{item.name}</Link>
-                                    )
-                                })
-                            }
-                        </ul>
+                        {user?.token ?
+                            (
+                                <ul className={`ml-4`}>
+                                    {
+                                        headersLog.map((item, index) => {
+                                            return (
+                                                <Link className="my-2 text-sm mx-2 font-medium hover:underline hover:underline-offset-4 hover:font-semibold" href={item.path} key={index}>{item.name}</Link>
+                                            )
+                                        })
+                                    }
+                                </ul>) :
+                            (
+                                <ul className={`ml-4`}>
+                                    {
+                                        headers.map((item, index) => {
+                                            return (
+                                                <Link className="my-2 text-sm mx-2 font-medium hover:underline hover:underline-offset-4 hover:font-semibold" href={item.path} key={index}>{item.name}</Link>
+                                            )
+                                        })
+                                    }
+                                </ul>)
+                        }
                     </div>
                     {user?.token ?
                         user.userType === "NORMAL" ?

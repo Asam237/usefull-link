@@ -32,7 +32,7 @@ export default function Login() {
                 queryKey: ["auth"]
             })
             setProgress(false)
-            router.push("/dashboard")
+            router.push("/explore")
         }
     })
     const handlerAuth = async (e: any) => {
