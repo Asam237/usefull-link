@@ -45,6 +45,16 @@ class LinkController {
       console.log(error);
     }
   }
+
+  public static async links(req: Request, res: Response, next: NextFunction): Promise<any> {
+    try {
+      const links: any = await LinkModel.find({})
+      return res.status(200).json(links)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   public static async destroy(
     req: Request,
     res: Response,

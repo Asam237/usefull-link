@@ -20,7 +20,8 @@ class LinkRoute {
       linkValidator.validate(link.createLink),
       LinkController.create
     );
-    this.router.get(`${prefix}/all`, verifyToken,  LinkController.all);
+    this.router.get(`${prefix}/all`, verifyToken, LinkController.all);
+    this.router.get(`${prefix}`, LinkController.links);
     this.router.get(`${prefix}/:id`, LinkController.one);
     this.router.delete(`${prefix}/:id`, LinkController.destroy);
   };
