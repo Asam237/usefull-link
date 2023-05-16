@@ -9,11 +9,17 @@ import {
     DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu'
 import { useRouter } from "next/router"
+import { useQueryClient } from "@tanstack/react-query"
 
 
 export const Header = () => {
-    const router = useRouter()
 
+    const queryClient = useQueryClient()
+    const mutationCache = queryClient.getMutationCache()
+    const mutation: any = mutationCache.find({ mutationKey: ["auth"] })
+    const user: any = mutation?.state?.data.data
+
+    const router = useRouter()
     const profile = () => {
         console.log('profile')
     }
@@ -39,13 +45,13 @@ export const Header = () => {
                             }
                         </ul>
                     </div>
-                    {/* {userToken.length > 50 ?
-                        userType === "NORMAL" ?
+                    {user?.token.length > 50 ?
+                        user.userType === "NORMAL" ?
                             < div className="flex justify-center items-center underline underline-offset-4">
                                 <DropdownMenu>
                                     <DropdownMenuTrigger className="outline-none">
                                         <div className="flex flex-row text-primary font-bold items-center text-sm">
-                                            <AiOutlineUser size={24} className="mr-2" /> {userFullname}
+                                            <AiOutlineUser size={24} className="mr-2" /> {user.fullname}
                                         </div>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent
@@ -72,7 +78,7 @@ export const Header = () => {
                                 <DropdownMenu>
                                     <DropdownMenuTrigger className="outline-none">
                                         <div className="flex flex-row text-primary font-bold items-center text-sm">
-                                            <AiOutlineUser size={24} className="mr-2" /> {userFullname}
+                                            <AiOutlineUser size={24} className="mr-2" /> {user.fullname}
                                         </div>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent
@@ -113,35 +119,7 @@ export const Header = () => {
                                 </Link>
                             </div>
                         </div>
-                    } */}
-
-                    < div className="flex justify-center items-center underline underline-offset-4">
-                        <DropdownMenu>
-                            <DropdownMenuTrigger className="outline-none">
-                                <div className="flex flex-row text-primary font-bold items-center text-sm">
-                                    <AiOutlineUser size={24} className="mr-2" /> Abba Sali
-                                </div>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent
-                                sideOffset={5}
-                                className="bg-white shadow-sm border min-w-[150px] rounded text-sm"
-                            >
-                                <DropdownMenuItem
-                                    onClick={profile}
-                                    className="px-3 py-1 outline-none cursor-pointer flex gap-2 items-center hover:bg-gray-100"
-                                >
-                                    Profile
-                                </DropdownMenuItem>
-                                <DropdownMenuSeparator className="border-t" />
-                                <DropdownMenuItem
-                                    onClick={logout}
-                                    className="px-3 py-1 outline-none cursor-pointer flex gap-2 items-center text-red-600 hover:bg-red-50"
-                                >
-                                    Deconnexion
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
+                    }
                 </div>
             </div>
         </header >

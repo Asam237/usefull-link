@@ -18,10 +18,14 @@ export default function Dashboard() {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [url, setUrl] = useState("")
-    const addLink: any = { name, description, url, user: "64520eeb054e147ae084ff82" }
 
     const queryClient = useQueryClient()
-    // console.log("Query CLient ===>", queryClient.getQueriesData({ queryKey: ["links"] })[0][1][0])
+    const mutationCache = queryClient.getMutationCache()
+    const mutation: any = mutationCache.find({ mutationKey: ['auth'] })
+
+    const id = mutation?.state?.data.data._id
+    const addLink: any = { name, description, url, user: `${id}` }
+
     const createLinkMutation = useMutation({
         mutationFn: createLink,
         onSuccess: () => {
