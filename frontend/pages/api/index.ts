@@ -9,8 +9,8 @@ export const authLogin = async (data: AuthLoginType) => {
     return await api.post("/auth/login", data)
 }
 
-export const create = async (data: AuthCreateType) => {
-    return await api.post("/create", data)
+export const createUser = async (data: AuthCreateType) => {
+    return await api.post("/auth/create", data)
 }
 
 export const getAll = async () => {

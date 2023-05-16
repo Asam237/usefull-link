@@ -36,7 +36,6 @@ export default function Login() {
         }
     })
     const handlerAuth = async (e: any) => {
-        // console.log("key ===========>", queryClient.getMutationCache().find({mutationKey: ["auth"]}))
         e.preventDefault()
         setProgress(true)
         await authMutation.mutate(data)
