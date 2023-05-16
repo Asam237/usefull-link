@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { LinkController } from "../controllers/link.controller";
+import { verifyToken } from "../core/verifyToken";
 import { Validator } from "../validator";
 import linkValidator from "../validator/link.validator";
 
@@ -19,7 +20,7 @@ class LinkRoute {
       linkValidator.validate(link.createLink),
       LinkController.create
     );
-    this.router.get(`${prefix}/all`, LinkController.all);
+    this.router.get(`${prefix}/all`, verifyToken,  LinkController.all);
     this.router.get(`${prefix}/:id`, LinkController.one);
     this.router.delete(`${prefix}/:id`, LinkController.destroy);
   };

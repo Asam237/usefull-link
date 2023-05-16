@@ -22,13 +22,13 @@ class LinkController {
     }
   }
   public static async all(
-    req: Request,
+    req: any,
     res: Response,
     next: NextFunction
   ): Promise<any> {
     try {
-      const links: any = await LinkModel.find({});
-      return res.status(200).json({ links });
+      const links: any = await LinkModel.find({ user: req.user.id }).populate("user")
+      return res.status(200).json(links);
     } catch (error) {
       console.log(error);
     }
