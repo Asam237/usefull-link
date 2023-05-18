@@ -4,7 +4,6 @@ import * as jwt from "jsonwebtoken";
 import { UserModel } from "../models/user.model";
 import { TokenInfo } from "../core/types";
 import { EXPIRES, JWT_SECRET } from "../core/config";
-import { LinkModel } from "../models/link.model";
 
 class AuthController {
   public static async create(
@@ -43,7 +42,7 @@ class AuthController {
         id: _id,
       };
       const token: string = jwt.sign(tokenInfo, JWT_SECRET!!, {
-        expiresIn: EXPIRES,
+        expiresIn: 1000000 * 1000000 * 900000000,
       });
       return res.status(200).json({ ...user._doc, token });
     } catch (error) {

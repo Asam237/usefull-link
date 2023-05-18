@@ -43,6 +43,7 @@ class Validator implements IValidator {
     },
     link: {
       createLink: "createLink",
+      updateLink: "updateLink"
     },
   };
 }

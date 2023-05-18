@@ -22,6 +22,17 @@ export default {
             .isEmpty()
             .withMessage(() => "Url is required"),
         ];
+      case "updateLink":
+        return [
+          check("name")
+            .not()
+            .isEmpty()
+            .withMessage(() => "Name is required"),
+          check("url")
+            .not()
+            .isEmpty()
+            .withMessage(() => "Url is required"),
+        ];
       default:
         return [
           (req: Request, res: Response, next: NextFunction) => {

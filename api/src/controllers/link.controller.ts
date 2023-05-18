@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { LinkModel } from "../models/link.model";
+import { LinkModel, linkUpdateParams } from "../models/link.model";
 import { UserModel } from "../models/user.model";
+import { parseRequest } from "../utils/helpers";
 
 class LinkController {
   public static async create(
@@ -66,6 +67,21 @@ class LinkController {
       return res.json({ message: "Link delete success !" });
     } catch (error) {
       console.log(error);
+    }
+  }
+  public static async update(req: Request, res: Response, next: NextFunction): Promise<any> {
+    const id = req.params.id
+    const data = parseRequest(req.body, linkUpdateParams)
+    let updateLink = null;
+
+    try {
+      if (data !== null) {
+        await LinkModel.findOneAndUpdate({ _id: id }, data)
+      }
+      updateLink = await LinkModel.findOne({ _id: id })
+      return res.json(updateLink)
+    } catch (error) {
+      console.log(error)
     }
   }
 }
