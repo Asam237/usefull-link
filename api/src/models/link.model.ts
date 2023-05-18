@@ -35,6 +35,6 @@ const linkSchema: mongoose.Schema = new mongoose.Schema({
 });
 
 const LinkModel: any = mongoose.model("Link", linkSchema);
-const linkUpdateParams: string[] = ["name", "description", "url"];
+const linkUpdateParams: string[] = ["name", "description", "url", "report"];
 
 export { LinkModel, linkUpdateParams };
