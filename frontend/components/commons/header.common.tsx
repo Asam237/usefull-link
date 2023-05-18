@@ -20,9 +20,8 @@ export const Header = () => {
     const token = cookie?.qwer?.token
     const userType = cookie?.qwer?.userType
 
-    const logout = () => {
-        removeCookie('qwer', { path: '/', domain: 'localhost' });
-        removeCookie("qwer")
+    const logout = async () => {
+        await removeCookie('qwer');
         router.push("/")
     }
 

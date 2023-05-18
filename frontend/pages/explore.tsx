@@ -5,7 +5,7 @@ import { Footer } from "../components/commons/footer.common";
 import { BiTrash } from "react-icons/bi";
 import { Items } from "../components/commons/items.commont";
 import { ItemType } from "../types";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getAllLink } from "./api";
 import Link from "next/link";
 import { useCookies } from "react-cookie";
@@ -13,11 +13,9 @@ import { useCookies } from "react-cookie";
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Dashboard() {
 
-    const queryClient = useQueryClient()
     const cookie: any = Object.values(useCookies(["qwer"]))[0]
-
     const token = cookie?.qwer?.token
-
+    
     const { isLoading, error, data } = useQuery({
         queryKey: ["links"],
         queryFn: () => getAllLink()
@@ -34,8 +32,7 @@ export default function Dashboard() {
             </Head>
             <div className={`${ubuntu.className}`}>
                 <Header />
-                {token.length > 50 ?
-
+                {typeof token !== "undefined" ?
                     (
                         <main className='py-16 container'>
                             <div className="flex justify-center items-center flex-col text-center">

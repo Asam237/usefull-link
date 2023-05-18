@@ -1,13 +1,11 @@
 import Link from "next/link"
 import { AiOutlineCode, AiOutlineLink, AiOutlineUser } from "react-icons/ai"
-import { useQueryClient } from "@tanstack/react-query"
+import { useCookies } from "react-cookie"
 
 export const Intro = () => {
 
-    const queryClient = useQueryClient()
-    const mutationCache = queryClient.getMutationCache()
-    const mutation: any = mutationCache.find({ mutationKey: ["auth"] })
-    const user: any = mutation?.state?.data.data
+    const cookie: any = Object.values(useCookies(["qwer"]))[0]
+    const token = cookie?.qwer?.token
 
     return (
         <section className={`text-md`}>
@@ -21,7 +19,7 @@ export const Intro = () => {
                         <AiOutlineLink size={24} className="mr-2" />  Explore link
                     </Link>
                     {
-                        user?.token.length > 50 ?
+                        typeof token !== "undefined" ?
                             <Link href={"/dashboard"} className="border-gray-900 border h-12 w-64 lg:w-52 rounded-lg text-gray-900 flex justify-center items-center hover:shadow-md hover:shadow-gray-400">
                                 <AiOutlineCode size={24} className="mr-2" />
                                 Your dashboard
