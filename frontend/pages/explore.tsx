@@ -15,7 +15,7 @@ export default function Dashboard() {
 
     const cookie: any = Object.values(useCookies(["qwer"]))[0]
     const token = cookie?.qwer?.token
-    
+
     const { isLoading, error, data } = useQuery({
         queryKey: ["links"],
         queryFn: () => getAllLink()
@@ -58,15 +58,16 @@ export default function Dashboard() {
                                         <BiTrash size={50} />
                                         <h4 className="my-4 text-sm">Vide</h4>
                                     </div> :
-                                        links?.map((item: ItemType, index: any) => {
+                                        links?.map((item: any, index: any) => {
                                             return (
-                                                <Items key={index} _id={item?._id} description={item.description} name={item.name} path={item.path} url={item.url} publicLink={false} createdAt={item.createdAt} />
+                                                <Items key={index} _id={item?._id} descriptionItem={item.description} nameItem={item.name} path={item.path} urlItem={item.url} publicLink={false} createdAt={item.createdAt} />
                                             )
                                         })
                                 }
                             </div>
                         </main>
-                    ) :
+                    )
+                    :
                     (<div className='py-16 lg:py-32  container'>
                         <div className="flex justify-center items-center flex-col text-center">
                             Vous devez vous connectez pour ajouter un lien.

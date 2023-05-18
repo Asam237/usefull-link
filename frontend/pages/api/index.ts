@@ -30,6 +30,10 @@ export const destroyLink = async (id: any) => {
     return await api.delete(`/links/${id}`)
 }
 
+export const updateLink = async (id: any, data: any) => {
+    return await api.put(`/links/${id}`, data)
+}
+
 export const getOneLink = async (id: any) => {
     return await api.get(`/links/${id}`).then((res) => res.data.link)
 }

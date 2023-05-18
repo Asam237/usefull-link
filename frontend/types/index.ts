@@ -46,9 +46,9 @@ export type AuthCreateType = {
 
 export type ItemType = {
     _id?: any
-    name: String
-    description: String
-    url: String
+    nameItem: String
+    descriptionItem: String
+    urlItem: String
     path: String
     report?: Boolean
     status?: String

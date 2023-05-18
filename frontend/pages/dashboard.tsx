@@ -45,7 +45,6 @@ export default function Dashboard() {
         createLinkMutation.mutate(addLink)
         setAddLinkModal(false)
     }
-
     const handleCancel = () => {
         setAddLinkModal(false)
     }
@@ -103,9 +102,9 @@ export default function Dashboard() {
                                         <BiTrash size={50} />
                                         <h4 className="my-4 text-sm">Vide</h4>
                                     </div> :
-                                        links?.map((item: ItemType, index: any) => {
+                                        links?.map((item: any, index: any) => {
                                             return (
-                                                <Items key={index} publicLink={true} _id={item?._id} description={item.description} name={item.name} path={item.path} url={item.url} createdAt={item.createdAt} />
+                                                <Items key={index} publicLink={true} _id={item?._id} descriptionItem={item.description} nameItem={item.name} path={item.path} urlItem={item.url} createdAt={item.createdAt} />
                                             )
                                         })
                                 }
