@@ -12,22 +12,21 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { createLink, getAll } from "./api";
 import Link from "next/link";
+import { useCookies } from "react-cookie"
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Dashboard() {
 
     const [addLinkModal, setAddLinkModal] = useState(false)
+    const cookie: any = Object.values(useCookies(["qwer"]))[0]
+    const token = cookie?.qwer?.token
+    const id = cookie?.qwer?._id
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [url, setUrl] = useState("")
-    const router = useRouter()
 
     const queryClient = useQueryClient()
-    const mutationCache = queryClient.getMutationCache()
-    const mutation: any = mutationCache.find({ mutationKey: ['auth'] })
-
-    const user = mutation?.state?.data.data || {}
-    const addLink: any = { name, description, url, user: `${user._id}` }
+    const addLink: any = { name, description, url, user: `${id}` }
 
     const createLinkMutation = useMutation({
         mutationFn: createLink,
@@ -37,7 +36,7 @@ export default function Dashboard() {
     })
     const { isLoading, error, data } = useQuery({
         queryKey: ["links"],
-        queryFn: () => getAll(user.token)
+        queryFn: () => getAll(token)
     })
     const links = data || []
 
@@ -64,7 +63,7 @@ export default function Dashboard() {
             </Head>
             <div className={`${ubuntu.className}`}>
                 <Header />
-                {Object.keys(user).length === 0 ?
+                {token?.length === 0 ?
                     (<div className='py-16 lg:py-32  container'>
                         <div className="flex justify-center items-center flex-col text-center">
                             Vous devez vous connectez pour ajouter un lien.

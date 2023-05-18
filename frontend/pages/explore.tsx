@@ -8,23 +8,21 @@ import { ItemType } from "../types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAllLink } from "./api";
 import Link from "next/link";
+import { useCookies } from "react-cookie";
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Dashboard() {
 
     const queryClient = useQueryClient()
-    const mutationCache = queryClient.getMutationCache()
-    const mutation: any = mutationCache.find({ mutationKey: ['auth'] })
+    const cookie: any = Object.values(useCookies(["qwer"]))[0]
 
-    const user = mutation?.state?.data.data || {}
+    const token = cookie?.qwer?.token
 
     const { isLoading, error, data } = useQuery({
         queryKey: ["links"],
         queryFn: () => getAllLink()
     })
     const links = data || []
-
-    console.log("LINK ==>", links)
 
     return (
         <>
@@ -36,16 +34,8 @@ export default function Dashboard() {
             </Head>
             <div className={`${ubuntu.className}`}>
                 <Header />
-                {Object.keys(user).length === 0 ?
-                    (<div className='py-16 lg:py-32  container'>
-                        <div className="flex justify-center items-center flex-col text-center">
-                            Vous devez vous connectez pour ajouter un lien.
-                            <Link href={'/login'} className="font-semibold text-sm mt-8 border px-4 py-2 border-black rounded-md">
-                                Connexion
-                            </Link>
-                        </div>
-                    </div>
-                    ) :
+                {token.length > 50 ?
+
                     (
                         <main className='py-16 container'>
                             <div className="flex justify-center items-center flex-col text-center">
@@ -79,7 +69,17 @@ export default function Dashboard() {
                                 }
                             </div>
                         </main>
-                    )}
+                    ) :
+                    (<div className='py-16 lg:py-32  container'>
+                        <div className="flex justify-center items-center flex-col text-center">
+                            Vous devez vous connectez pour ajouter un lien.
+                            <Link href={'/login'} className="font-semibold text-sm mt-8 border px-4 py-2 border-black rounded-md">
+                                Connexion
+                            </Link>
+                        </div>
+                    </div>
+                    )
+                }
                 <Footer />
             </div>
         </>

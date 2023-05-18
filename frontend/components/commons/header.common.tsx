@@ -9,22 +9,23 @@ import {
     DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu'
 import { useRouter } from "next/router"
-import { useQueryClient } from "@tanstack/react-query"
+import { useCookies } from "react-cookie"
 
 
 export const Header = () => {
 
-    const queryClient = useQueryClient()
-    const mutationCache = queryClient.getMutationCache()
-    const mutation: any = mutationCache.find({ mutationKey: ["auth"] })
-    const user: any = mutation?.state?.data.data
-
+    const [cookie, removeCookie]: any = useCookies(["qwer"])
     const router = useRouter()
+    const name = cookie?.qwer?.fullname
+    const token = cookie?.qwer?.token
+    const userType = cookie?.qwer?.userType
 
     const logout = () => {
-        queryClient.clear()
+        removeCookie('qwer', { path: '/', domain: 'localhost' });
+        removeCookie("qwer")
         router.push("/")
     }
+
 
     return (
         <header className={`py-4 shadow-md border-b z-50 sticky top-0 left-0 bg-white`}>
@@ -34,7 +35,7 @@ export const Header = () => {
                         <Link href={"/"}>
                             <AiOutlineCodepen size={40} />
                         </Link>
-                        {user?.token ?
+                        {token ?
                             (
                                 <ul className={`ml-4`}>
                                     {
@@ -57,13 +58,13 @@ export const Header = () => {
                                 </ul>)
                         }
                     </div>
-                    {user?.token ?
-                        user.userType === "NORMAL" ?
+                    {token ?
+                        userType === "NORMAL" ?
                             < div className="flex justify-center items-center underline underline-offset-4">
                                 <DropdownMenu>
                                     <DropdownMenuTrigger className="outline-none">
                                         <div className="flex flex-row text-primary font-bold items-center text-sm">
-                                            <AiOutlineUser size={24} className="mr-2" /> {user.fullname}
+                                            <AiOutlineUser size={24} className="mr-2" /> {name}
                                         </div>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent
@@ -84,7 +85,7 @@ export const Header = () => {
                                 <DropdownMenu>
                                     <DropdownMenuTrigger className="outline-none">
                                         <div className="flex flex-row text-primary font-bold items-center text-sm">
-                                            <AiOutlineUser size={24} className="mr-2" /> {user.fullname}
+                                            <AiOutlineUser size={24} className="mr-2" /> {name}
                                         </div>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent

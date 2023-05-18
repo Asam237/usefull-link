@@ -54,7 +54,7 @@ export const Items = ({ _id, name, description, url, path, createdAt, publicLink
                 <p className="leading-loose truncate">
                     <Link target={"_blank"} className="text-clip text-sm text-blue-600 font-semibold underline truncate underline-offset-4 hover:text-blue-800" href={""}>{url}</Link>
                 </p>
-                <p className="italic underline underline-offset-4 text-xs py-4 text-gray-500">{new Date(createdAt).toDateString()}</p>
+                <p className="italic text-xs py-4 text-gray-500">{new Date(createdAt).toDateString()}</p>
                 <div className={`${publicLink === true ? 'visible' : 'invisible'}`}>
                     <hr className="my-3" />
                     <div className="flex justify-between items-center">

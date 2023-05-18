@@ -21,7 +21,7 @@ export const headersLog = [
         path: "/explore"
     },
     {
-        name: "Dashboard",
+        name: "My Links",
         path: "/dashboard"
     },
 ]

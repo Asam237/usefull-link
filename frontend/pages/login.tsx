@@ -7,12 +7,14 @@ import { useState } from 'react'
 import { useRouter } from "next/router"
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { authLogin } from './api'
+import { useCookies } from "react-cookie"
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 
 export default function Login() {
 
     const router = useRouter()
+    const [cookies, setCookies] = useCookies(["qwer"])
     const [email, setEmail] = useState("")
     const [loading, setLoading] = useState(false)
     const [progress, setProgress] = useState(false)
@@ -24,14 +26,15 @@ export default function Login() {
         mutationKey: ["auth"],
         onError: () => {
             setProgress(false)
-            router.push("/login")
             setLoading(true)
+            router.push("/login")
         },
         onSuccess: async () => {
             await queryClient.invalidateQueries({
                 queryKey: ["auth"]
             })
             setProgress(false)
+            await myauth(data)
             router.push("/explore")
         }
     })
@@ -40,6 +43,11 @@ export default function Login() {
         setProgress(true)
         await authMutation.mutate(data)
 
+    }
+    const myauth = async (data: any) => {
+        const auth = await authLogin(data)
+        const user: any = auth?.data
+        setCookies("qwer", user, { secure: true })
     }
 
     return (
