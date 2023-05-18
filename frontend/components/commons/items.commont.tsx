@@ -7,7 +7,7 @@ import { Modal } from "./modal.common";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { destroyLink, updateLink } from "../../pages/api";
 
-export const Items = ({ _id, nameItem, descriptionItem, urlItem, path, createdAt, publicLink }: ItemType) => {
+export const Items = ({ _id, nameItem, descriptionItem, urlItem, path, createdAt, publicLink, reportItem }: ItemType) => {
 
     const [deleteLinkModal, setDeleteLinkModal] = useState(false)
     const [reportLinkModal, setReportLinkModal] = useState(false)
@@ -34,9 +34,17 @@ export const Items = ({ _id, nameItem, descriptionItem, urlItem, path, createdAt
         e.preventDefault()
         const edit = await updateLink(_id, data)
         if (edit.status === 200) {
-            console.log("Here ====>", edit)
             await updateLink(_id, data)
             setEditLinkModal(false)
+        }
+    }
+
+    const handleReportLink = async (e: any) => {
+        e.preventDefault()
+        let report = true
+        const myreport = await updateLink(_id, { report })
+        if (myreport.status === 200) {
+            await updateLink(_id, { report })
         }
     }
 
@@ -55,11 +63,6 @@ export const Items = ({ _id, nameItem, descriptionItem, urlItem, path, createdAt
 
     const handleDeleteLink = () => {
         setDeleteLinkModal(true)
-    }
-
-    const saveEditLink = () => {
-        console.log("Edit Link here !")
-        setEditLinkModal(false)
     }
 
     return (
@@ -154,7 +157,10 @@ export const Items = ({ _id, nameItem, descriptionItem, urlItem, path, createdAt
                                     Cancel
                                 </button>
                             </div>
-                            <button onClick={saveEditLink} className="bg-red-500 px-4 py-2 w-28 rounded-lg text-white flex justify-center items-center">
+                            <button onClick={(e: any) => {
+                                handleReportLink(e)
+                                setReportLinkModal(false)
+                            }} className="bg-red-500 px-4 py-2 w-28 rounded-lg text-white flex justify-center items-center">
                                 Report
                             </button>
                         </div>

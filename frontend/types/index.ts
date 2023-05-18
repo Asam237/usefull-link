@@ -50,7 +50,7 @@ export type ItemType = {
     descriptionItem: String
     urlItem: String
     path: String
-    report?: Boolean
+    reportItem?: Boolean
     status?: String
     createdAt?: any
     publicLink?: boolean
