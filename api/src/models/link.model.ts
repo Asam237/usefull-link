@@ -24,6 +24,9 @@ const linkSchema: mongoose.Schema = new mongoose.Schema({
     default: "REVIEWING",
     required: true,
   },
+  confidentiality: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now()
@@ -35,6 +38,6 @@ const linkSchema: mongoose.Schema = new mongoose.Schema({
 });
 
 const LinkModel: any = mongoose.model("Link", linkSchema);
-const linkUpdateParams: string[] = ["name", "description", "url", "report"];
+const linkUpdateParams: string[] = ["name", "description", "url", "report", "confidentiality"];
 
 export { LinkModel, linkUpdateParams };

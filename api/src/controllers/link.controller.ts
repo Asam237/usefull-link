@@ -10,9 +10,9 @@ class LinkController {
     next: NextFunction
   ): Promise<any> {
     try {
-      const { name, description, url, report, status }: any = req.body;
+      const { name, description, url, report, status, confidentiality }: any = req.body;
       const user = await UserModel.findById({ _id: req.body.user });
-      const linkParams: any = { name, description, url, report, status, user };
+      const linkParams: any = { name, description, url, report, status, user, confidentiality };
       const link: any = new LinkModel(linkParams);
       user.links.push(link._id);
       await user.save();
