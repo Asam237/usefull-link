@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllLink } from "./api";
 import Link from "next/link";
 import { useCookies } from "react-cookie";
+import { useState } from "react";
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Dashboard() {
@@ -21,6 +22,17 @@ export default function Dashboard() {
         queryFn: () => getAllLink()
     })
     const links = data || []
+    const publicLink: any = []
+
+    links.map((item: any, index: any) => {
+        console.log("TYPE ====>", typeof item.confidentiality)
+        if (item.confidentiality === 'public') {
+            publicLink.push({ ...item })
+        }
+    })
+
+    console.log("ALL ====>", links)
+    console.log("PUBLIC ====>", publicLink)
 
     return (
         <>
@@ -52,13 +64,13 @@ export default function Dashboard() {
                                     Error..
                                 </div>
                             )}
-                            <div className={`${links?.length === 0 ? 'sm:grid-cols-1 lg:grid-cols-1' : 'sm:grid-cols-2 lg:grid-cols-3'} grid gap-x-4 gap-y-10 `}>
+                            <div className={`${publicLink?.length === 0 ? 'sm:grid-cols-1 lg:grid-cols-1' : 'sm:grid-cols-2 lg:grid-cols-3'} grid gap-x-4 gap-y-10 `}>
                                 {
-                                    links?.length === 0 ? <div className="flex justify-center items-center flex-col mx-auto">
+                                    publicLink?.length === 0 ? <div className="flex justify-center items-center flex-col mx-auto">
                                         <BiTrash size={50} />
                                         <h4 className="my-4 text-sm">Vide</h4>
                                     </div> :
-                                        links?.map((item: any, index: any) => {
+                                        publicLink?.map((item: any, index: any) => {
                                             return (
                                                 <Items key={index} _id={item?._id} descriptionItem={item.description} nameItem={item.name} path={item.path} urlItem={item.url} publicLink={false} createdAt={item.createdAt} />
                                             )

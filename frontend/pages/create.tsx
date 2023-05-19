@@ -4,7 +4,6 @@ import { Ubuntu } from "@next/font/google"
 import Link from 'next/link'
 import { Footer } from '../components/commons/footer.common'
 import { useState } from 'react'
-import { AuthService } from '../services/auth.service'
 import { useRouter } from 'next/router'
 import { useMutation } from "@tanstack/react-query"
 import { createUser } from './api'

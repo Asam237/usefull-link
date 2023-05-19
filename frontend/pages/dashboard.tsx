@@ -22,11 +22,12 @@ export default function Dashboard() {
     const token = cookie?.qwer?.token
     const id = cookie?.qwer?._id
     const [name, setName] = useState("")
+    const [confidentiality, setConfidentiality] = useState("")
     const [description, setDescription] = useState("")
     const [url, setUrl] = useState("")
 
     const queryClient = useQueryClient()
-    const addLink: any = { name, description, url, user: `${id}` }
+    const addLink: any = { name, description, url, confidentiality, user: `${id}` }
 
     const createLinkMutation = useMutation({
         mutationFn: createLink,
@@ -51,6 +52,7 @@ export default function Dashboard() {
     const handleAddLink = () => {
         setAddLinkModal(true)
     }
+
 
     return (
         <>
@@ -125,8 +127,18 @@ export default function Dashboard() {
                                 <input type="text" className='px-6 rounded-md py-1 bg-white border w-full' onChange={(e) => setName(e.target.value)} />
                             </div>
                             <div>
-                                <p className='text-sm py-1 mt-4'>Link</p>
-                                <input type="text" className='px-6 rounded-md py-1 bg-white border w-full' onChange={(e) => setUrl(e.target.value)} />
+                                <p className='text-sm py-1 mt-4'>Url</p>
+                                <input type="text" className='px-4 rounded-md py-1 bg-white border w-full' onChange={(e) => setUrl(e.target.value)} />
+                            </div>
+                            <div>
+                                <p className='text-sm py-1 mt-4'>Confidentiality</p>
+                                <select onChange={(e) => {
+                                    setConfidentiality(e.target.value)
+                                }} className="px-6 rounded-md py-3 bg-white border w-full" name="confidentiality" id="">
+                                    <option value="">Privacy</option>
+                                    <option value="private">Private</option>
+                                    <option value="public">Public</option>
+                                </select>
                             </div>
                             <div>
                                 <p className='text-sm py-1 mt-4'>Description</p>
