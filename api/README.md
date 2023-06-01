@@ -24,6 +24,8 @@ docker-compose build
 
 docker-compose up -d
 
+yarn install
+
 yarn serve
 ```
 
