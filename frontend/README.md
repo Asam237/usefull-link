@@ -1,6 +1,6 @@
 ## Usefull Link App
 
-Usefull Link API
+Usefull Link Frontend
 <br/>
 
 ## Stack
@@ -14,7 +14,7 @@ Usefull Link API
 ## Installation
 
 ```
-git clone https://github.com/Asam237/usefull-link  
+git clone https://github.com/Asam237/usefull-link
 
 cd frontend
 
@@ -22,7 +22,9 @@ yarn install
 
 yarn dev
 ```
+
 <br />
+
 ## Authors
 
 This project is maintained by:
@@ -32,9 +34,8 @@ This project is maintained by:
 - email: abbasalimokolo@gmail.com
 - mobile: (+237) 691846922
 
-<br/>
-inspired by: https://eyupfidan.com/
 <br />
+
 ## License
 
 [The MIT License.](https://opensource.org/licenses/MIT)

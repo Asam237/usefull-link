@@ -64,9 +64,6 @@ This project is maintained by:
 
 <br/>
 
-inspired by: https://eyupfidan.com/
-<br />
-
 ## License
 
 [The MIT License.](https://opensource.org/licenses/MIT)
