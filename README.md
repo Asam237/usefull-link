@@ -37,7 +37,7 @@ docker-compose up -d
 
 yarn install
 
-yarn start
+yarn serve
 ```
 
 ### FRONTEND

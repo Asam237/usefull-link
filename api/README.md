@@ -24,7 +24,7 @@ docker-compose build
 
 docker-compose up -d
 
-yarn start
+yarn serve
 ```
 
 ## Authors
