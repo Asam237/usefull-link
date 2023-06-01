@@ -1,26 +1,31 @@
-## Introduction
+## Usefull Link App
 
 Usefull Link API
 <br/>
 
-## Composition
+## Stack
 
-This starter kit is composed of:
-
-- [Node.js](https://nodejs.org)
-  <br/>
-- [Express.js](https://expressjs.com)
-  <br/>
-- [JsonWebToken](https://www.npmjs.com/package/jsonwebtoken)
-  <br/>
-- [Validator](https://www.npmjs.com/package/validator)
-  <br/>
-- [Bcryptjs](https://www.npmjs.com/package/bcryptjs)
+- Node.js
+- Express.js
+- JsonWebToken
+- Bcryptjs
   <br/>
 
-## Development
+## Installation
 
-## Deployment
+```
+git clone https://github.com/Asam237/usefull-link
+
+cd api
+
+cp .env.example .env
+
+docker-compose build
+
+docker-compose up -d
+
+yarn start
+```
 
 ## Authors
 

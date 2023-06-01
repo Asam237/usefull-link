@@ -11,23 +11,10 @@ Usefull Link Project
 - Deployed on Vercel
 - MongoDB
 - Express
-- [Node.js](https://nodejs.org)
-  <br/>
-- [Node.js](https://nodejs.org)
-  <br/>
-- [Node.js](https://nodejs.org)
-  <br/>
-- [Node.js](https://nodejs.org)
-  <br/>
-- [Node.js](https://nodejs.org)
-  <br/>
-- [Express.js](https://expressjs.com)
-  <br/>
-- [JsonWebToken](https://www.npmjs.com/package/jsonwebtoken)
-  <br/>
-- [Validator](https://www.npmjs.com/package/validator)
-  <br/>
-- [Bcryptjs](https://www.npmjs.com/package/bcryptjs)
+- Node.js
+- Express.js
+- JsonWebToken
+- Bcryptjs
   <br/>
   <br/>
 
@@ -40,10 +27,17 @@ git clone https://github.com/Asam237/usefull-link
 ### API
 
 ```
-
 cd api
 
+cp .env.example .env
+
+docker-compose build
+
 docker-compose up -d
+
+yarn install
+
+yarn start
 ```
 
 ### FRONTEND
@@ -73,7 +67,3 @@ inspired by: https://eyupfidan.com/
 ## License
 
 [The MIT License.](https://opensource.org/licenses/MIT)
-
-```
-
-```
