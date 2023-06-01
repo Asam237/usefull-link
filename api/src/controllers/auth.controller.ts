@@ -1,54 +1,51 @@
 import { Request, Response, NextFunction } from "express";
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
-import { UserModel } from "../models/user.model";
-import { TokenInfo } from "../core/types";
-import { EXPIRES, JWT_SECRET } from "../core/config";
+import { CreateUserInput, LoginType } from "../shared/types/models";
+import userService from "../domain/services/user.service";
+import { TokenPayload } from "../shared/types/commons";
+import { EXPIRES, JWT_SECRET } from "../shared/core/config";
 
-class AuthController {
-  public static async create(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<any> {
-    try {
-      const { fullname, email, userType, avatar }: any = req.body;
-      const password: string = bcrypt.hashSync(req.body.password, 10);
-      const userParams: any = { fullname, email, userType, avatar, password };
-      const user = new UserModel(userParams);
-      await user.save();
-      return res.status(200).json({ user });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  public static async login(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<any> {
-    const { email, password }: any = req.body;
-    try {
-      const user: any = await UserModel.findOne({ email });
-      if (!user) {
-        return res.status(403).json({ message: "login failed !" });
-      }
-      const isMatch: boolean = bcrypt.compareSync(password, user.password);
-      if (!isMatch) {
-        return res.status(403).json({ message: "login failed !" });
-      }
-      const { _id } = user;
-      const tokenInfo: TokenInfo = {
-        id: _id,
-      };
-      const token: string = jwt.sign(tokenInfo, JWT_SECRET!!, {
-        expiresIn: 1000000 * 1000000 * 900000000,
-      });
-      return res.status(200).json({ ...user._doc, token });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-}
+const create = async (req: Request, res: Response) => {
+  const {
+    avatar,
+    createdAt,
+    email,
+    fullname,
+    userType,
+    link,
+  }: CreateUserInput = req.body;
+  const password: string = bcrypt.hashSync(req.body.password, 10);
+  const createUser = await userService.create({
+    avatar,
+    createdAt,
+    email,
+    fullname,
+    link,
+    password,
+    userType,
+  });
+  return res.status(200).json({ user: createUser });
+};
 
-export { AuthController };
+const login = async (req: Request, res: Response) => {
+  const { email, password }: LoginType = req.body;
+  const user = await userService.findByEmail(email);
+  if (!user) {
+    return res.status(400).json({ message: "Login failed !" });
+  }
+  const isMatch: boolean = bcrypt.compareSync(password, user.password);
+  if (!isMatch) {
+    return res.status(400).json({ message: "Login failed !" });
+  }
+  const { _id } = user;
+  const tokenPayload: TokenPayload = {
+    id: _id,
+  };
+  const token: string = jwt.sign(tokenPayload, JWT_SECRET!!, {
+    expiresIn: EXPIRES
+  });
+  return res.status(200).json({ ...user._doc, token });
+};
+
+export { create, login };

@@ -1,35 +1,17 @@
 import { Router } from "express";
-import { LinkController } from "../controllers/link.controller";
-import { verifyToken } from "../core/verifyToken";
-import { Validator } from "../validator";
-import linkValidator from "../validator/link.validator";
+import * as linkController from "../controllers/link.controller";
+import { verifyToken } from "../utils/verifyToken";
 
-const { link }: any = Validator.method;
-
-class LinkRoute {
-  public router: Router;
-  constructor() {
-    this.router = Router();
-    this.routes();
-  }
-
-  routes = () => {
-    const prefix: string = "/links";
-    this.router.post(
-      `${prefix}/create`,
-      linkValidator.validate(link.createLink),
-      LinkController.create
-    );
-    this.router.put(
-      `${prefix}/:id`,
-      linkValidator.validate(link.updateLink),
-      LinkController.update
-    );
-    this.router.get(`${prefix}/all`, verifyToken, LinkController.all);
-    this.router.get(`${prefix}`, LinkController.links);
-    this.router.get(`${prefix}/:id`, LinkController.one);
-    this.router.delete(`${prefix}/:id`, LinkController.destroy);
-  };
-}
+const LinkRoute = () => {
+  const router = Router();
+  const prefix: string = "/links";
+  router.post(`${prefix}/create`, linkController.create);
+  router.put(`${prefix}/:id`, linkController.update);
+  router.get(`${prefix}`, linkController.links);
+  router.get(`${prefix}/all`, verifyToken, linkController.all);
+  router.get(`${prefix}/:id`, linkController.one);
+  router.delete(`${prefix}/:id`, linkController.destroy);
+  return router;
+};
 
 export { LinkRoute };

@@ -1,18 +1,19 @@
-import express from "express";
 import * as http from "http";
-import { PORT } from "./src/core/config";
-import { connectToDB } from "./src/core/connect/db";
-import { Routes } from "./src/routes";
+import express from "express";
+import { setupRestEndpoint } from "./src/server";
+import { PORT } from "./src/shared/core/config";
+import { connectToDB } from "./src/shared/core/database";
 
-const app = express();
-const server: http.Server = http.createServer(app);
-Routes.init(app);
-
-server.listen(PORT, async () => {
-  try {
+const startServer = () => {
+  const app = express();
+  setupRestEndpoint(app);
+  const server: http.Server = http.createServer(app);
+  server.listen(PORT, async () => {
     await connectToDB();
-    console.log(`[server]: connected to ${PORT}`);
-  } catch (error) {
-    console.log(error);
-  }
-});
+    console.log(`[server]: is running ${PORT}`);
+  });
+};
+
+void (() => {
+  startServer();
+})();

@@ -1,89 +1,62 @@
-import { Request, Response, NextFunction } from "express";
-import { LinkModel, linkUpdateParams } from "../models/link.model";
-import { UserModel } from "../models/user.model";
+import { Request, Response } from "express";
+import { LinkModel, linkUpdateParams } from "../domain/models/link.model";
+import { UserModel } from "../domain/models/user.model";
+import linkService from "../domain/services/link.service";
+import { CreateLinkInput } from "../shared/types/models";
 import { parseRequest } from "../utils/helpers";
 
-class LinkController {
-  public static async create(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<any> {
-    try {
-      const { name, description, url, report, status, confidentiality }: any = req.body;
-      const user = await UserModel.findById({ _id: req.body.user });
-      const linkParams: any = { name, description, url, report, status, user, confidentiality };
-      const link: any = new LinkModel(linkParams);
-      user.links.push(link._id);
-      await user.save();
-      await link.save();
-      return res.status(200).json({ user });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  public static async all(
-    req: any,
-    res: Response,
-    next: NextFunction
-  ): Promise<any> {
-    try {
-      const links: any = await LinkModel.find({ user: req.user.id }).populate("user")
-      return res.status(200).json(links);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  public static async one(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<any> {
-    try {
-      const link: any = await LinkModel.findOne({ _id: req.params.id });
-      return res.status(200).json({ link });
-    } catch (error) {
-      console.log(error);
-    }
-  }
+const create = async (req: Request, res: Response) => {
+  const {
+    confidentiality,
+    createdAt,
+    description,
+    name,
+    report,
+    status,
+    url,
+  }: CreateLinkInput = req.body;
+  const user = await UserModel.findById({ _id: req.body.user });
+  const createLink = await linkService.create({
+    confidentiality,
+    createdAt,
+    description,
+    name,
+    report,
+    status,
+    url,
+    user,
+  });
+  user.links.push(createLink._id);
+  await user.save();
+  await createLink.save();
+  return res.status(200).json({ user });
+};
 
-  public static async links(req: Request, res: Response, next: NextFunction): Promise<any> {
-    try {
-      const links: any = await LinkModel.find({})
-      return res.status(200).json(links)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+const all = async (req: any, res: Response) => {
+  const links: any = await linkService.all(req.user.id, "user");
+  return res.status(200).json(links);
+};
 
-  public static async destroy(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<any> {
-    const id = req.params.id;
-    try {
-      await LinkModel.deleteOne({ _id: id });
-      return res.json({ message: "Link delete success !" });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  public static async update(req: Request, res: Response, next: NextFunction): Promise<any> {
-    const id = req.params.id
-    const data = parseRequest(req.body, linkUpdateParams)
-    let updateLink = null;
+const one = async (req: Request, res: Response) => {
+  const link: any = linkService.one(req.params.id);
+  return res.status(200).json({ link });
+};
 
-    try {
-      if (data !== null) {
-        await LinkModel.findOneAndUpdate({ _id: id }, data)
-      }
-      updateLink = await LinkModel.findOne({ _id: id })
-      return res.json(updateLink)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-}
+const links = async (req: Request, res: Response) => {
+  const links: any = await LinkModel.find({});
+  return res.status(200).json(links);
+};
 
-export { LinkController };
+const destroy = async (req: Request, res: Response) => {
+  await linkService.destroy(req.params.id);
+  return res.json({ message: "Link delete success !" });
+};
+
+const update = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const data = parseRequest(req.body, linkUpdateParams);
+  const updateLink = await linkService.update(id, data);
+  return res.json(updateLink);
+};
+
+export { create, all, one, links, destroy, update };
