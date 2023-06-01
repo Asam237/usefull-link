@@ -8,10 +8,12 @@ import { useRouter } from "next/router"
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { authLogin } from './api'
 import { useCookies } from "react-cookie"
+import { object, string, number, date, InferType } from 'yup';
 
 const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 
 export default function Login() {
+
 
     const router = useRouter()
     const [cookies, setCookies] = useCookies(["qwer"])
@@ -19,6 +21,10 @@ export default function Login() {
     const [loading, setLoading] = useState(false)
     const [progress, setProgress] = useState(false)
     const [password, setPassword] = useState("")
+    let userSchema = object({
+        email: string().email(),
+        password: string().min(4).required(),
+    });
     const data = { email, password }
     const queryClient = useQueryClient()
     const authMutation = useMutation({
