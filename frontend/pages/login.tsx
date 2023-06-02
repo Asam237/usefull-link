@@ -17,7 +17,7 @@ export default function Login() {
 
     const router = useRouter()
     const [cookies, setCookies] = useCookies(["qwer"])
-    const [email, setEmail] = useState("")
+    const [username, setUsername] = useState("")
     const [loading, setLoading] = useState(false)
     const [progress, setProgress] = useState(false)
     const [password, setPassword] = useState("")
@@ -25,7 +25,7 @@ export default function Login() {
         email: string().email(),
         password: string().min(4).required(),
     });
-    const data = { email, password }
+    const data = { username, password }
     const queryClient = useQueryClient()
     const authMutation = useMutation({
         mutationFn: authLogin,
@@ -75,8 +75,8 @@ export default function Login() {
                             <form onSubmit={handlerAuth}>
                                 <div className='max-w-sm bg-gray-50 px-8 py-6 border'>
                                     <div>
-                                        <p className='text-sm py-1'>Email address</p>
-                                        <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" className='px-2 rounded-md py-1 bg-white border lg:w-[20rem]' />
+                                        <p className='text-sm py-1'>Username</p>
+                                        <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" className='px-2 rounded-md py-1 bg-white border lg:w-[20rem]' />
                                     </div>
                                     <div className='mt-4'>
                                         <div className='flex justify-between items-center py-1'>

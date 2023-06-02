@@ -13,8 +13,9 @@ const ubuntu = Ubuntu({ weight: "400", subsets: ['latin'] })
 export default function Create() {
     const [fullname, setFullname] = useState("")
     const [email, setEmail] = useState("")
+    const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const newUser: any = { fullname, email, password }
+    const newUser: any = { fullname, email, password, username }
     const [loading, setLoading] = useState(false)
     const router = useRouter()
 
@@ -63,6 +64,10 @@ export default function Create() {
                                     <div className='mt-4'>
                                         <p className='text-sm py-1'>Full name</p>
                                         <input type="text" onChange={(e) => setFullname(e.target.value)} className='px-2 rounded-md py-1 bg-white border lg:w-[20rem]' />
+                                    </div>
+                                    <div className='mt-4'>
+                                        <p className='text-sm py-1'>Username</p>
+                                        <input type="text" onChange={(e) => setUsername(e.target.value)} className='px-2 rounded-md py-1 bg-white border lg:w-[20rem]' />
                                     </div>
                                     <div className='mt-4'>
                                         <div className='flex justify-between items-center py-1'>

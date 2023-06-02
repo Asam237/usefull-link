@@ -33,12 +33,13 @@ export type HeaderItemType = {
 }
 
 export type AuthLoginType = {
-    email: string
+    username: string
     password: string
 }
 
 export type AuthCreateType = {
     fullname: string
+    username: string
     email: string
     password: string
     userType: string
