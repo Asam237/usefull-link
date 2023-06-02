@@ -5,8 +5,8 @@ const create = async (input: CreateUserInput) => {
   return await UserModel.create(input);
 };
 
-const findByEmail = async (email: any) => {
-  return await UserModel.findOne({ email });
+const findByUsername = async (username: any) => {
+  return await UserModel.findOne({ username });
 };
 
-export default { create, findByEmail };
+export default { create, findByUsername };

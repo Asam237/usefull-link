@@ -1,5 +1,6 @@
 export type CreateUserInput = {
   fullname: string;
+  username: string;
   email: string;
   password: string;
   userType: string;
@@ -20,6 +21,6 @@ export type CreateLinkInput = {
 };
 
 export type LoginType = {
-  email: string;
+  username: string;
   password: string;
 };

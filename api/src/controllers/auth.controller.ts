@@ -10,6 +10,7 @@ const create = async (req: Request, res: Response) => {
   const {
     avatar,
     createdAt,
+    username,
     email,
     fullname,
     userType,
@@ -19,6 +20,7 @@ const create = async (req: Request, res: Response) => {
   const createUser = await userService.create({
     avatar,
     createdAt,
+    username,
     email,
     fullname,
     link,
@@ -29,8 +31,8 @@ const create = async (req: Request, res: Response) => {
 };
 
 const login = async (req: Request, res: Response) => {
-  const { email, password }: LoginType = req.body;
-  const user = await userService.findByEmail(email);
+  const { username, password }: LoginType = req.body;
+  const user = await userService.findByUsername(username);
   if (!user) {
     return res.status(400).json({ message: "Login failed !" });
   }
@@ -43,7 +45,7 @@ const login = async (req: Request, res: Response) => {
     id: _id,
   };
   const token: string = jwt.sign(tokenPayload, JWT_SECRET!!, {
-    expiresIn: EXPIRES
+    expiresIn: parseInt(EXPIRES!!.toString()),
   });
   return res.status(200).json({ ...user._doc, token });
 };
