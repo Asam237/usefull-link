@@ -4,12 +4,12 @@ import { GithubImg, TwitterImg } from "./icons";
 export const footerlink: FooterLinkType[] = [
     {
         icon: GithubImg,
-        path: "/"
+        path: "https://github.com/Asam237/usefull-link"
     },
-    {
-        icon: TwitterImg,
-        path: "/"
-    },
+    // {
+    //     icon: TwitterImg,
+    //     path: "/"
+    // },
 ]
 
 export const footerlinkCondition: FooterLinkConditionType[] = [
